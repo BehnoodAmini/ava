@@ -106,13 +106,13 @@
     width: 150px;
   }
   
-  .side-menu .title {
+  /*.side-menu .title {
     height: 28px;
     left: 18px;
     position: relative;
     top: 11px;
     width: 113px;
-  }
+  }*/
   
   .side-menu .text-wrapper {
     color: #ffffff;
@@ -151,7 +151,7 @@
     top: 5px;
   }
   
-  .side-menu .element-2 {
+  /*.side-menu .element-2 {
     color: #ffffff;
     direction: rtl;
     font-size: 16px;
@@ -161,7 +161,7 @@
     line-height: normal;
     position: absolute;
     top: 0;
-  }
+  }*/
   
   button{
     background-color: transparent;
