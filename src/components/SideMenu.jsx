@@ -41,26 +41,26 @@ const SideMenu = ({ className }) => {
             />
           </div>
         </div>
-        <button className="goftar">
-          <div className="text-wrapper">
-            <img
-              className="speech-icon"
-              alt="Speech icon"
-              src={speechIcon}
-            />
-            <div className="text">تبدیل گفتار</div>
-          </div>
-        </button>
-        <button className="archive">
-          <div className="text-wrapper">
-            <img
-              className="archive-icon"
-              alt="Archive icon"
-              src={archiveIcon}
-            />
-            <div className="text">آرشیو</div>
-          </div>
-        </button>
+          <button className="goftar">
+            <div className="text-wrapper">
+              <img
+                className="speech-icon"
+                alt="Speech icon"
+                src={speechIcon}
+              />
+              <div className="text">تبدیل گفتار</div>
+            </div>
+          </button>
+          <button className="archive">
+            <div className="text-wrapper">
+              <img
+                className="archive-icon"
+                alt="Archive icon"
+                src={archiveIcon}
+              />
+              <div className="text">آرشیو</div>
+            </div>
+          </button>
       </div>
     </div>
   );
