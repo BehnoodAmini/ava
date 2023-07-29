@@ -1,0 +1,23 @@
+.header{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.title{
+    color: #00BA9F;
+    top: 70px;
+    left: 549px;
+    position: absolute;
+    height: 48px;
+    width: 227px;
+}
+
+.description {
+    color: #969696;
+    height: 56px;
+    width: 434px;
+    top: 134px;
+    left: 446px;
+    position: absolute;
+}

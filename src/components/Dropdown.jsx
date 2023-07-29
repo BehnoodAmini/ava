@@ -20,16 +20,16 @@ const Dropdown = () => {
   return (
     <div className="box">
       <div className="dropdown">
-        <button onClick={handleOpen} className="overlap-group">
+        <button onClick={handleOpen} className="buttons-group">
           {open ?
             (
               <div className="open-border">
                 <div className="logout">
                   <button className="logout-button">خروج</button>
-                  <img className="img" alt="Logout" src={LogoutIcon} />
+                  <img className="logout-icon" alt="Logout" src={LogoutIcon} />
                 </div>
                 <img className="seperator" alt="Seperator" src={Seprator} />
-                <div className="div">مهمان</div>
+                <div className="text">مهمان</div>
                 <img
                   className="drop-icon"
                   alt="Drop icon"
