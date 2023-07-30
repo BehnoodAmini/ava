@@ -78,7 +78,7 @@ const Upload = () => {
                         </div>
                     </button>
                 </div>
-                
+
                 {isShownRecord &&
                     <div className="center-mic">
                         <button className="center-mic-icon">
@@ -112,9 +112,7 @@ const Upload = () => {
                 {isShownLink &&
                     <div className="center-link">
                         <div className="input-box">
-                            <input className="link-input">
-
-                            </input>
+                            <input className="link-input" placeholder="example.com/sample.mp3"></input>
                             <button className="center-link-icon">
                                 <img
                                     className="center-linkIcon"
@@ -124,7 +122,7 @@ const Upload = () => {
                             </button>
                         </div>
                         <div className="center-link-text">
-                            نشان اینترتی فایل حاوی گفتار (صوتی/تصویری) را وارد<br />
+                            نشان اینترنتی فایل حاوی گفتار (صوتی/تصویری) را وارد<br />
                             و دکمه را فشار دهید
                         </div>
                     </div>
