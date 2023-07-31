@@ -1,11 +1,11 @@
 import React from "react";
 import "./SideMenu.css";
 
-import alefba from '../assets/images/alefba-group-1.png';
-import archiveIcon from '../assets/images/archive-icon-1@2x.png';
-import speechIcon from '../assets/images/speech-icon-1@2x.png';
-import line1Icon from '../assets/images/line-1-1.svg';
-import line2Icon from '../assets/images/line-2-1.svg';
+import alefba from '../../assets/images/alefba-group-1.png';
+import archiveIcon from '../../assets/images/archive-icon-1@2x.png';
+import speechIcon from '../../assets/images/speech-icon-1@2x.png';
+import line1Icon from '../../assets/images/line-1-1.svg';
+import line2Icon from '../../assets/images/line-2-1.svg';
 
 const SideMenu = ({ className }) => {
   return (

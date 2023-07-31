@@ -1,8 +1,8 @@
 import './App.css';
-import SideMenu from './components/SideMenu';
-import Dropdown from './components/Dropdown';
-import Header from './components/Header';
-import Upload from './components/Upload';
+import SideMenu from './components/sidemenu/SideMenu';
+import Dropdown from './components/dropdowns/Dropdown';
+import Header from './components/Header/Header';
+import Upload from './components/upload/Upload';
 
 function App() {
   return (

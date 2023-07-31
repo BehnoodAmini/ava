@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 import "./Dropdown.css";
 
-import DropIcon from "../assets/images/drop-icon.svg";
-import UserIcon from "../assets/images/user-icon.svg";
-import UpDropIcon from "../assets/images/up-drop-Icon.png";
-import LogoutIcon from "../assets/images/logout.png";
-import Seprator from "../assets/images/Seperator.png";
+import DropIcon from "../../assets/images/drop-icon.svg";
+import UserIcon from "../../assets/images/user-icon.svg";
+import UpDropIcon from "../../assets/images/up-drop-Icon.png";
+import LogoutIcon from "../../assets/images/logout.png";
+import Seprator from "../../assets/images/Seperator.png";
 
 
 const Dropdown = () => {
