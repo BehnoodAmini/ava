@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
+import AudioUploaded from "./AudioUploaded";
 import "./Upload.css";
 
 import micIconWhite from "../../assets/images/mic-icon-white.svg";
@@ -110,27 +111,29 @@ const Upload = (props) => {
                     </div>
                 }
                 {isShownUpload && (
-                    fileAudio ? (<div> File is upload</div>) : (
-                    <div className="center-upload">
-                        <button className="center-upload-icon" onClick={handleClick}>
-                            <img
-                                className="center-uploadIcon"
-                                src={uploadIconWhite}
-                                alt="uploadIcon"
-                            />
-                        </button>
-                        <input type="file"
-                            ref={hiddenFileInput}
-                            onChange={event => handleChangeUpload(event)}
-                            //onChange={handleChangeUpload}
-                            style={{ display: 'none' }}
-                        />
-                        <div className="center-upload-text">
-                            برای بارگذاری فایل گفتاری (صوتی/تصویری)، دکمه را فشار دهید <br />
-                            متن پیاده شده آن، در اینجا ظاهر شود
-                        </div>
-                    </div>
-                ))}
+                    fileAudio
+                        ? <div><AudioUploaded color="#118AD3"/></div>
+                        : (
+                            <div className="center-upload">
+                                <button className="center-upload-icon" onClick={handleClick}>
+                                    <img
+                                        className="center-uploadIcon"
+                                        src={uploadIconWhite}
+                                        alt="uploadIcon"
+                                    />
+                                </button>
+                                <input type="file"
+                                    ref={hiddenFileInput}
+                                    onChange={event => handleChangeUpload(event)}
+                                    //onChange={handleChangeUpload}
+                                    style={{ display: 'none' }}
+                                />
+                                <div className="center-upload-text">
+                                    برای بارگذاری فایل گفتاری (صوتی/تصویری)، دکمه را فشار دهید <br />
+                                    متن پیاده شده آن، در اینجا ظاهر شود
+                                </div>
+                            </div>
+                        ))}
 
 
                 {isShownLink &&
