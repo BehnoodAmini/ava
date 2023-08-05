@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import "./AudioUploaded.css"
 
+import VoiceBar from "../voiceBar/VoiceBar";
+
 import simpleTextIconGray from "../../assets/images/simple-text-icon-gray.svg"
 import simpleTextIconBlack from "../../assets/images/simple-text-icon-black.svg";
 import timedTextIconGray from "../../assets/images/timed-text-icon-gray.svg"
@@ -116,7 +118,7 @@ const AudioUploaded = props => {
 
             </div>
             <div className="voice-bar">
-                <audio controls className="audio" />
+                <VoiceBar />
             </div>
         </div >
     );
