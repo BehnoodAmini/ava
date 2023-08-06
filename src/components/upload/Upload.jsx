@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 import AudioUploaded from "./AudioUploaded";
+import LanguageDropdown from "../dropdowns/LanguageDropdown";
 import "./Upload.css";
 
 import micIconWhite from "../../assets/images/mic-icon-white.svg";
@@ -155,6 +156,7 @@ const Upload = (props) => {
                     </div>
                 }
             </div>
+            <LanguageDropdown />
         </div >
     );
 };

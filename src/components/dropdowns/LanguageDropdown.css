@@ -1,0 +1,131 @@
+.language {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    position: fixed;
+    top: 728px;
+    left: 336px;
+  }
+  
+  .language .language-dropdown {
+    position: fixed;
+  }
+  
+  .language .buttons-group {
+    background-color: transparent;
+    position: relative;
+    border-color: transparent;
+  }
+  
+  .farsi-border {
+    border: 1.5px solid;
+    border-color: #00ba9f;
+    border-radius: 20px;
+    background-color: #fdfdfd;
+    height: 37px;
+    width: 121px;
+    height: 37px;
+    position: fixed;
+    width: 123px;
+    top: 728px;
+    left: 336px;
+  }
+  
+  .language .text-wrapper {
+    color: #00ba9f;
+    direction: rtl;
+    font-family: "IRANYekan";
+    font-size: 15px;
+    font-weight: 400;
+    left: 38px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: left;
+    top: 4px;
+  }
+  
+  .language .drop-icon {
+    height: 4px;
+    left: 20px;
+    position: absolute;
+    top: 16px;
+    width: 6px;
+  }
+  
+  .language .user-icon {
+    height: 18px;
+    left: 83px;
+    position: absolute;
+    top: 10px;
+    width: 18px;
+  }
+  
+  .language .logout {
+    height: 24px;
+    left: 4px;
+    position: absolute;
+    top: 46px;
+    width: 55px;
+    bottom: 4px;
+  }
+  
+  .language .logout-icon {
+    height: 14px;
+    left: 80px;
+    top: 4px;
+    position: absolute;
+    width: 13px;
+  }
+  
+  .language .seperator {
+    height: 1px;
+    left: 19px;
+    position: absolute;
+    top: 39px;
+    width: 84px;
+  }
+  
+  .language .text {
+    color: #00ba9f;
+    direction: rtl;
+    font-family: "IRANYekan";
+    font-size: 15px;
+    font-weight: 400;
+    left: 38px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: left;
+    top: 4px;
+  }
+  
+  .language .open-border {
+    height: 81px;
+    position: fixed;
+    width: 123px;
+    top: 48px;
+    left: 47px;
+    border: 1.5px solid;
+    border-color: #00ba9f;
+    border-radius: 20px;
+    background-color: #fdfdfd;
+  }
+  
+  .language .logout-button {
+    color: #00ba9f;
+    direction: rtl;
+    font-family: "IRANYekan";
+    font-size: 15px;
+    font-weight: 400;
+    left: 32px;
+    position: absolute;
+    background-color: #fdfdfd;
+    border-color: transparent;
+  }
+  
+  .language .logout button {
+    bottom: 1%;
+  }
