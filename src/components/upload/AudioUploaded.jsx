@@ -3,6 +3,10 @@ import { useState } from "react";
 import "./AudioUploaded.css"
 
 import VoiceBar from "../voiceBar/VoiceBar";
+import { testList } from "./testData";
+
+import SimpleBarReact from "simplebar-react";
+import "../../../node_modules/simplebar-react/dist/simplebar.min.css";
 
 import simpleTextIconGray from "../../assets/images/simple-text-icon-gray.svg"
 import simpleTextIconBlack from "../../assets/images/simple-text-icon-black.svg";
@@ -25,6 +29,12 @@ const AudioUploaded = props => {
     const handleClickTimed = event => {
         setSimpleIsShown(false);
         setTimeIsShown(true);
+    }
+
+    function formatDuration(value) {
+        const minute = Math.floor(value / 60);
+        const secondLeft = value - minute * 60;
+        return `${minute < 10 ? `0${minute}` : minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
     }
 
     return (
@@ -114,11 +124,35 @@ const AudioUploaded = props => {
                 </div>
             </div>
             <img className="hr" src={hr} alt="hr" />
-            <div className="text-box">
 
-            </div>
-            <div className="voice-bar">
-                <VoiceBar />
+
+            <SimpleBarReact style={{ maxHeight: 300, direction: 'rtl', scrollbarMinSize: 1 }} data-simplebar-direction='rtl' >
+                <div className="center-box">
+                    {simpleIsShown
+                        ? (<div className="text-box"></div>)
+                        : (
+                            testList.map((data, key) => {
+                                return (
+                                    <div
+                                        className="data-row"
+                                        key={key}
+                                        style={key % 2 === 0 ? { backgroundColor: "rgb(242, 242, 242)" } : { backgroundColor: "#ffffff" }}
+                                    >
+                                        <div className="end-time">{formatDuration(data.endTime)}</div>
+                                        <div className="start-time">{formatDuration(data.startTime)}</div>
+                                        <div className="data-text">{data.text}</div>
+                                    </div>
+                                );
+                            }
+                            )
+                        )
+                    }
+                </div>
+            </SimpleBarReact>
+            <div className="footer">
+                <div className="voice-bar">
+                    <VoiceBar />
+                </div>
             </div>
         </div >
     );
