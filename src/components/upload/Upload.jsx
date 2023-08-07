@@ -156,7 +156,7 @@ const Upload = (props) => {
                     </div>
                 }
             </div>
-            <LanguageDropdown />
+            <LanguageDropdown fileAudio={fileAudio} />
         </div >
     );
 };

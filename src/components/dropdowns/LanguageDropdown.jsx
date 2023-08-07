@@ -7,7 +7,7 @@ import UpDropIcon from "../../assets/images/up-drop-Icon.png";
 import Seprator from "../../assets/images/Seperator.png";
 
 
-const Dropdown = () => {
+const Dropdown = ({ fileAudio }) => {
 
     const [open, setOpen] = useState(false);
     const [isFarsi, setIsFarsi] = useState(true);
@@ -27,68 +27,75 @@ const Dropdown = () => {
     }
 
     return (
-        <div className="language">
-            <div className="language-dropdown">
-                {isFarsi &&
-                    <button onClick={handleOpen} className="buttons-group">
-                        {open ?
-                            (
-                                <div className="open-border">
-                                    <div className="logout">
-                                        <button className="logout-button" onClick={handleEng}>انگلیسی</button>
+        <>
+            <div className="zaban-goftar" style={fileAudio ? { opacity: "50%" } : { opacity: "100" }}>زبان گفتار:</div>
+            <div className="language">
+                <div className="language-dropdown">
+                    {isFarsi &&
+                        <button
+                            onClick={handleOpen}
+                            disabled={fileAudio ? true : false}
+                            className="language-buttons-group"
+                        >
+                            {open ?
+                                (
+                                    <div className="language-open-border">
+                                        <div className="down">
+                                            <button className="down-button" onClick={handleEng}>انگلیسی</button>
+                                        </div>
+                                        <img className="language-seperator" alt="Seperator" src={Seprator} />
+                                        <div className="language-text">فارسی</div>
+                                        <img
+                                            className="language-drop-icon"
+                                            alt="Drop icon"
+                                            src={UpDropIcon} />
                                     </div>
-                                    <img className="seperator" alt="Seperator" src={Seprator} />
-                                    <div className="text">فارسی</div>
-                                    <img
-                                        className="drop-icon"
-                                        alt="Drop icon"
-                                        src={UpDropIcon} />
-                                </div>
-                            ) :
-                            (
-                                <div className="farsi-border">
-                                    <div className="text-wrapper">فارسی</div>
-                                    <img
-                                        className="drop-icon"
-                                        alt="Drop icon"
-                                        src={DropIcon}
-                                    />
-                                </div>
-                            )
-                        }
-                    </button>
-                }
-                {isEng &&
-                    <button onClick={handleOpen} className="buttons-group">
-                        {open ?
-                            (
-                                <div className="open-border">
-                                    <div className="logout">
-                                        <button className="logout-button" onClick={handleFarsi}>فارسی</button>
+                                ) :
+                                (
+                                    <div className="language-close-border" style={fileAudio ? { opacity: "50%" } : { opacity: "100" }}>
+                                        <div className="language-text-wrapper">فارسی</div>
+                                        <img
+                                            className="language-drop-icon"
+                                            alt="Drop icon"
+                                            src={DropIcon}
+                                        />
                                     </div>
-                                    <img className="seperator" alt="Seperator" src={Seprator} />
-                                    <div className="text">انگلیسی</div>
-                                    <img
-                                        className="drop-icon"
-                                        alt="Drop icon"
-                                        src={UpDropIcon} />
-                                </div>
-                            ) :
-                            (
-                                <div className="default-border">
-                                    <div className="text-wrapper">انگلیسی</div>
-                                    <img
-                                        className="drop-icon"
-                                        alt="Drop icon"
-                                        src={DropIcon}
-                                    />
-                                </div>
-                            )
-                        }
-                    </button>
-                }
+                                )
+                            }
+                        </button>
+                    }
+                    {isEng &&
+                        <button onClick={handleOpen} className="language-buttons-group">
+                            {open ?
+                                (
+                                    <div className="language-open-border">
+                                        <div className="down">
+                                            <button className="down-button" onClick={handleFarsi}>فارسی</button>
+                                        </div>
+                                        <img className="language-seperator" alt="Seperator" src={Seprator} />
+                                        <div className="language-text">انگلیسی</div>
+                                        <img
+                                            className="language-drop-icon"
+                                            alt="Drop icon"
+                                            src={UpDropIcon} />
+                                    </div>
+                                ) :
+                                (
+                                    <div className="language-close-border" style={fileAudio ? { opacity: "50%" } : { opacity: "100" }}>
+                                        <div className="language-text-wrapper">انگلیسی</div>
+                                        <img
+                                            className="language-drop-icon"
+                                            alt="Drop icon"
+                                            src={DropIcon}
+                                        />
+                                    </div>
+                                )
+                            }
+                        </button>
+                    }
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
