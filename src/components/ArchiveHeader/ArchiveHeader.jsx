@@ -2,9 +2,9 @@ import './ArchiveHeader.css'
 
 const ArchiveHeader = () => {
     return ( 
-        <div className="header">
-            <h2 className="title">آرشیو من</h2>
-            <div className="lables">
+        <div className="archive-header">
+            <h2 className="archive-title">آرشیو من</h2>
+            <div className="archive-lables">
                 <div className="file-name">نام فایل</div>
                 <div className="date">تاریخ بارگذاری</div>
                 <div className="data-type">نوع فایل</div>
