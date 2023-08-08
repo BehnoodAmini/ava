@@ -1,0 +1,29 @@
+.header {
+    position: absolute;
+    top: 12%;
+    width: 100%;
+}
+
+.header .title {
+    margin-left: 50%;
+    font-weight: 400;
+    color: #00BA9F;
+}
+
+.header .lables {
+    font-size: 14px;
+    display: flex;
+    margin-right: 27%;
+}
+
+.lables .date {
+    margin-right: 35%;
+}
+
+.lables .data-type {
+    margin-right: 6%;
+}
+
+.lables .file-length {
+    margin-right: 5%;
+}
