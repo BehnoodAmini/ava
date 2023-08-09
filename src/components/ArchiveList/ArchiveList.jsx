@@ -1,8 +1,19 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 
-import RightArrowIcon from '../../assets/images/right-arrow-Icon.svg'
-import LeftArrowIcon from '../../assets/images/left-arrow-Icon.svg'
+import {data} from '../../assets/dummydata/data';
+
+import './ArchiveList.css';
+
+import RightArrowIcon from '../../assets/images/right-arrow-Icon.svg';
+import LeftArrowIcon from '../../assets/images/left-arrow-Icon.svg';
+import DownloadIcon from '../../assets/images/download-icon.svg';
+import WordIcon from '../../assets/images/Word-icon.svg';
+import CopyIcon from '../../assets/images/copy-icon.svg';
+import DelIcon from '../../assets/images/del-icon.svg';
+import RecordIcon from '../../assets/images/green-record-btn.svg';
+import UploadIcon from '../../assets/images/blue-upload-icon.svg';
+import LinkIcon from '../../assets/images/red-link-icon.svg';
 /*import {
   archiveDummyData,
   prevSvg,
@@ -14,14 +25,14 @@ import LeftArrowIcon from '../../assets/images/left-arrow-Icon.svg'
 const ArchiveList = () => {
   const [currentPage, setCurrentPage] = useState(0);
   //const [data, setData] = useState<data[]>(archiveDummyData);
-  //const [itemsPerPage, setItemsPerPage] = useState<number>(8);
+  const [itemsPerPage] = useState(8);
 
   // the number of items to display per page
-  useEffect(() => {
+  /*useEffect(() => {
     // first load
     const pageHeight = document.documentElement.scrollHeight;
     const itemsperpage = 8;
-  }, []);
+  }, []);*/
 
   // calculate the total number of pages
   const pageCount = Math.ceil(data.length / itemsPerPage);
@@ -49,19 +60,55 @@ const ArchiveList = () => {
     );
   };*/
 
+  function formatDuration(value) {
+    const minute = Math.floor(value / 60);
+    const secondLeft = value - minute * 60;
+    return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
+}
+
   return (
-    <div className="archive-ai-content">
+    <div className="archive-container">
       {/* Display data */}
-      <div className="ai-files-container">
-        {currentPageItems.map((item, index) => {
+      <div className="archive-files-container">
+        {currentPageItems.map((data, key) => {
           return (
-            <AiFile
-              key={index}
-              files={data}
-              setFiles={setData}
-              item={item}
-              onItemClick={onItemClick}
-            />
+            <div className="archive-file" key={key}>
+              <div className="sendtype-icon">
+                {data.sendType === "record"
+                  ? RecordIcon
+                  : data.sendType === "upload"
+                  ? UploadIcon
+                  : data.sendType === "link"
+                  ? LinkIcon
+                  : ""}
+              </div>
+              <span className={`archive-file-name ${data.sendType === "link" && "link-name"}`}>
+                {data.name}
+              </span>
+              <span className="archive-file-date">
+                {data.createdAt}
+              </span>
+              <span className="archive-file-type">
+                {data.voiceType}
+              </span>
+              <span className="archive-file-duration">
+                {formatDuration(data.duration)}
+              </span>
+              <div className="archive-icons">
+                <div className="archive-download-icone">
+                  {DownloadIcon}
+                </div>
+                <div className="archive-word-icon">
+                  {WordIcon}
+                </div>
+                <div className="archive-copy-icon">
+                  {CopyIcon}
+                </div>
+                <div className="archive-del-icon">
+                  {DelIcon}
+                </div>
+              </div>
+            </div>
           );
         })}
       </div>

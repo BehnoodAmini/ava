@@ -8,8 +8,8 @@ export const data = [
       duration: 269, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -22,8 +22,8 @@ export const data = [
       duration: 268, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -36,8 +36,8 @@ export const data = [
       duration: 194, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -50,8 +50,8 @@ export const data = [
       duration: 5298, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -64,8 +64,8 @@ export const data = [
       duration: 5298, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -78,8 +78,8 @@ export const data = [
       duration: 268, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -92,8 +92,8 @@ export const data = [
       duration: 194, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -106,8 +106,8 @@ export const data = [
       duration: 5298, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -120,8 +120,8 @@ export const data = [
       duration: 268, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -134,8 +134,8 @@ export const data = [
       duration: 269, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -148,8 +148,8 @@ export const data = [
       duration: 194, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -162,8 +162,8 @@ export const data = [
       duration: 5298, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -176,8 +176,8 @@ export const data = [
       duration: 268, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -190,8 +190,8 @@ export const data = [
       duration: 5298, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -204,8 +204,8 @@ export const data = [
       duration: 194, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -218,8 +218,8 @@ export const data = [
       duration: 5298, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -232,8 +232,8 @@ export const data = [
       duration: 269, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -246,8 +246,8 @@ export const data = [
       duration: 194, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -260,8 +260,8 @@ export const data = [
       duration: 268, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -274,8 +274,8 @@ export const data = [
       duration: 5298, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -288,8 +288,8 @@ export const data = [
       duration: 5298, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -302,8 +302,8 @@ export const data = [
       duration: 268, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -316,8 +316,8 @@ export const data = [
       duration: 5298, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -330,8 +330,8 @@ export const data = [
       duration: 194, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -344,8 +344,8 @@ export const data = [
       duration: 269, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -358,8 +358,8 @@ export const data = [
       duration: 268, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -372,8 +372,8 @@ export const data = [
       duration: 5298, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -386,8 +386,8 @@ export const data = [
       duration: 194, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -400,8 +400,8 @@ export const data = [
       duration: 5298, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -414,8 +414,8 @@ export const data = [
       duration: 268, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -428,8 +428,8 @@ export const data = [
       duration: 5298, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -442,8 +442,8 @@ export const data = [
       duration: 194, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     },
@@ -456,8 +456,8 @@ export const data = [
       duration: 269, // seconds
       downloadLink: "#",
       wordLink: "#",
-      text: text,
-      timeText: timeText,
+      /*text: text,
+      timeText: timeText,*/
       size: 3.18,
       lang: "FA"
     }
