@@ -12,8 +12,8 @@ import simpleTextIconGray from "../../assets/images/simple-text-icon-gray.svg"
 import simpleTextIconBlack from "../../assets/images/simple-text-icon-black.svg";
 import timedTextIconGray from "../../assets/images/timed-text-icon-gray.svg"
 import timedTextIconBlack from "../../assets/images/timed-text-icon-black.svg"
-import downloadIcon from "../../assets/images/download-icon.svg";
-import copyIcon from "../../assets/images/copy-icon.svg";
+import downloadIcon from "../../assets/images/gray-download-icon.svg";
+import copyIcon from "../../assets/images/gray-copy-icon.svg";
 import refreshIcon from "../../assets/images/refresh-icon.svg";
 import hr from "../../assets/images/horizontal-line.svg"
 

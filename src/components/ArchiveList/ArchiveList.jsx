@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 
-import {data} from '../../assets/dummydata/data';
+import { data } from '../../assets/dummydata/data';
 
 import './ArchiveList.css';
 
-import RightArrowIcon from '../../assets/images/right-arrow-Icon.svg';
-import LeftArrowIcon from '../../assets/images/left-arrow-Icon.svg';
-import DownloadIcon from '../../assets/images/download-icon.svg';
-import WordIcon from '../../assets/images/Word-icon.svg';
-import CopyIcon from '../../assets/images/copy-icon.svg';
-import DelIcon from '../../assets/images/del-icon.svg';
+import { ReactComponent as RightArrowIcon } from '../../assets/images/right-arrow-Icon.svg';
+import { ReactComponent as LeftArrowIcon } from '../../assets/images/left-arrow-Icon.svg';
+import { ReactComponent as DownloadIcon } from '../../assets/images/download-icon.svg';
+import { ReactComponent as WordIcon } from '../../assets/images/Word-icon.svg';
+import { ReactComponent as CopyIcon } from '../../assets/images/copy-icon.svg';
+import { ReactComponent as DelIcon } from '../../assets/images/del-icon.svg';
 import RecordIcon from '../../assets/images/green-record-btn.svg';
 import UploadIcon from '../../assets/images/blue-upload-icon.svg';
 import LinkIcon from '../../assets/images/red-link-icon.svg';
@@ -64,7 +64,7 @@ const ArchiveList = () => {
     const minute = Math.floor(value / 60);
     const secondLeft = value - minute * 60;
     return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
-}
+  }
 
   return (
     <div className="archive-container">
@@ -73,18 +73,20 @@ const ArchiveList = () => {
         {currentPageItems.map((data, key) => {
           return (
             <div className="archive-file" key={key}>
-              <div className="sendtype-icon">
-                {data.sendType === "record"
+              <img
+                className="sendtype-icon"
+                src={data.sendType === "record"
                   ? RecordIcon
                   : data.sendType === "upload"
-                  ? UploadIcon
-                  : data.sendType === "link"
-                  ? LinkIcon
-                  : ""}
-              </div>
-              <span className={`archive-file-name ${data.sendType === "link" && "link-name"}`}>
+                    ? UploadIcon
+                    : data.sendType === "link"
+                      ? LinkIcon
+                      : ""}
+                alt="icons"
+              />
+              <button className={`archive-file-name ${data.sendType === "link" && "link-name"}`}>
                 {data.name}
-              </span>
+              </button>
               <span className="archive-file-date">
                 {data.createdAt}
               </span>
@@ -95,18 +97,32 @@ const ArchiveList = () => {
                 {formatDuration(data.duration)}
               </span>
               <div className="archive-icons">
-                <div className="archive-download-icone">
-                  {DownloadIcon}
-                </div>
-                <div className="archive-word-icon">
-                  {WordIcon}
-                </div>
-                <div className="archive-copy-icon">
-                  {CopyIcon}
-                </div>
-                <div className="archive-del-icon">
-                  {DelIcon}
-                </div>
+                <DownloadIcon className="archive-download-icon" />
+                <WordIcon className="archive-word-icon" />
+                <CopyIcon className="archive-copy-icon" />
+                <button className="archive-del-btn">
+                  <DelIcon className="archive-del-icon" />
+                </button>
+                {/*<img
+                  className="archive-download-icon"
+                  src={DownloadIcon}
+                  alt="download-icon"
+                />
+                <img
+                  className="archive-word-icon"
+                  src={WordIcon}
+                  alt="word-icon"
+                />
+                <img
+                  className="archive-copy-icon"
+                  src={CopyIcon}
+                  alt="copy-icon"
+                />
+                <img
+                  className="archive-del-icon"
+                  src={DelIcon}
+                  alt="delete-icon"
+          />*/}
               </div>
             </div>
           );
@@ -116,8 +132,8 @@ const ArchiveList = () => {
       {/* Render the pagination component */}
       <div className="pagination-container">
         <ReactPaginate
-          previousLabel={RightArrowIcon}
-          nextLabel={LeftArrowIcon}
+          previousLabel={<RightArrowIcon />}
+          nextLabel={<LeftArrowIcon />}
           breakLabel={"..."}
           breakClassName={"break-me"}
           pageCount={pageCount}
