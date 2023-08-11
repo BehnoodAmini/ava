@@ -8,7 +8,7 @@ import PlayArrowRounded from "@mui/icons-material/PlayArrowRounded";
 import StopIcon from "@mui/icons-material/Stop";
 import VolumeUpRounded from "@mui/icons-material/VolumeUpRounded";
 
-const VoiceBar = () => {
+const VoiceBar = (props) => {
     const duration = 200; // seconds
     const [position, setPosition] = useState(0);
     const [paused, setPaused] = useState(true);
@@ -25,18 +25,11 @@ const VoiceBar = () => {
                     defaultValue={30}
                     sx={{
                         "& .MuiSlider-track": {
-                            border: "none"
+                            border: "none",
+                            backgroundColor: props.color
                         },
                         "& .MuiSlider-thumb": {
-                            width: 8,
-                            height: 8,
-                            backgroundColor: "#fff",
-                            "&:before": {
-                                boxShadow: "0 4px 8px rgba(0,0,0,0.4)"
-                            },
-                            "&:hover, &.Mui-focusVisible, &.Mui-active": {
-                                boxShadow: "none"
-                            }
+                            display: "none"
                         },
                         "& .MuiSlider-rail": {
                             opacity: 0.28,
@@ -58,11 +51,12 @@ const VoiceBar = () => {
                 max={duration}
                 onChange={(_, value) => setPosition(value)}
                 sx={{
-                    width: "70%",
+                    width: "25rem",
                     height: 4,
                     "& .MuiSlider-thumb": {
-                        width: 8,
-                        height: 8,
+                        color: props.color,
+                        width: 14,
+                        height: 14,
                         transition: "0.3s cubic-bezier(.47,1.64,.41,.8)",
                         "&:before": {
                             boxShadow: "0 2px 12px 0 rgba(0,0,0,0.4)"
@@ -78,6 +72,9 @@ const VoiceBar = () => {
                     "& .MuiSlider-rail": {
                         opacity: 0.28,
                         color: "rgb(0 0 0 / 50%)"
+                    },
+                    "& .MuiSlider-track": {
+                        color: props.color
                     }
                 }}
             />

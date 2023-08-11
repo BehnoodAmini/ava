@@ -2,17 +2,19 @@
     justify-content: center;
     align-items: center;
     display: inline-flex;
-    width: 98%;
+    width: 37rem;
     background-color: rgb(248, 248, 248);
     border-radius: 10px;
+    position: relative;
 }
 
 .voice-bar .volume-bar {
-    width: 13%;
-    margin-left: 75%;
+    width: 14%;
+    margin-left: 30rem;
     position: absolute;
     display: inline-flex;
     align-items: center;
+    overflow: hidden;
 }
 
 .volume-bar .volume-icon {

@@ -23,36 +23,52 @@
 .archive-container .archive-file-inactive {
     display: flex;
     width: 70rem;
-    justify-content: right;
+    justify-content: center;
     align-items: center;
     height: 4rem;
     border-radius: 10px;
 
     &:hover {
         box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
-      }
+    }
 }
 
 .archive-container .archive-file-active {
+    height: 23rem;
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
+    padding-top: 3rem;
+}
+
+.archive-container .archive-file-up {
     display: flex;
     width: 70rem;
-    justify-content: right;
-    align-items: center;
-    height: 4rem;
-    border-radius: 10px;
+    justify-content: center;
 }
 
 .archive-container .sendtype-icon {
-    margin-right: 1%;
+    align-items: center;
+    width: 31px;
+    height: 31px;
+    flex: 1;
 }
 
 .archive-container .archive-file-name {
     direction: ltr;
-    margin-right: 12%;
     background-color: transparent;
     border-color: transparent;
     font-family: 'IRANYekan';
+    flex: 5.4;
+    text-align: end;
+    max-height: 28px;
+    white-space: nowrap;
+    overflow-x: auto;
     font-size: 16px;
+    font-weight: 300;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .archive-container .link-name {
@@ -60,85 +76,86 @@
 }
 
 .archive-container .archive-file-date {
-    position: absolute;
-    left: 36%;
+    flex: 1.7;
+    text-align: center;
 }
 
 .archive-container .archive-file-type {
-    position: absolute;
-    left: 28.5%;
+    flex: 1;
+    direction: ltr;
+    text-align: center;
 }
 
 .archive-container .archive-file-duration {
-    position: absolute;
-    left: 21.5%;
+    flex: 1.1;
+    position: relative;
+    text-align: center;
     font-family: 'IRANSans';
 }
 
 .archive-container .archive-icons {
     display: flex;
     justify-content: space-evenly;
-    width: 10%;
-    left: 10%;
-    position: absolute;
+    flex: 1.8;
 }
 
-.archive-container .archive-download-icon{
+.archive-container .archive-download-icon {
     fill: rgb(143, 143, 143);
 }
 
-.archive-container .archive-download-icon:hover{
+.archive-container .archive-download-icon:hover {
     fill: rgb(7, 180, 155);
 }
 
-.archive-container .archive-word-icon{
+.archive-container .archive-word-icon {
     fill: rgb(143, 143, 143);
 }
 
-.archive-container .archive-word-icon:hover{
+.archive-container .archive-word-icon:hover {
     fill: rgb(7, 180, 155);
 }
 
-.archive-container .archive-copy-icon{
+.archive-container .archive-copy-icon {
     fill: rgb(143, 143, 143);
 }
 
-.archive-container .archive-copy-icon:hover{
+.archive-container .archive-copy-icon:hover {
     fill: rgb(7, 180, 155);
 }
 
-.archive-container .archive-del-icon{
+.archive-container .archive-del-icon {
     stroke: rgb(143, 143, 143);
 }
 
-.archive-container .archive-del-icon:hover{
+.archive-container .archive-del-icon:hover {
     stroke: rgb(255, 255, 255);
 }
 
-.archive-del-btn {
+.archive-container .archive-del-btn {
     height: 25px;
     width: 25px;
     background-color: transparent;
     border-color: transparent;
     border-radius: 25px;
-    &:hover{
+
+    &:hover {
         background-color: rgb(220, 53, 69);
         border-radius: 25px;
     }
 }
 
-.pagination-container {
+.archive-container .pagination-container {
     display: flex;
     justify-content: center;
     margin-top: 20px;
     font-family: 'IRANSans';
 }
 
-.pagination {
+.archive-container .pagination {
     display: flex;
 }
 
-.pagination li {
+.archive-container .pagination li {
     display: flex;
     justify-content: center;
     margin: 0 2px;
@@ -152,19 +169,19 @@
     background-color: white;
 }
 
-li.active {
+.archive-container li.active {
     color: white;
     background-color: rgb(7, 180, 155);
 }
 
-li.previous,
-li.next {
+.archive-container li.previous,
+.archive-container li.next {
     color: black;
     background-color: white;
     margin: 0 0px;
 }
 
-li.disabled {
+.archive-container li.disabled {
     pointer-events: none;
     opacity: 1;
 }

@@ -5,7 +5,7 @@
 }
 
 .archive-header .archive-title {
-    margin-left: 50%;
+    margin-left: 57%;
     font-weight: 400;
     color: #00BA9F;
 }
@@ -13,17 +13,17 @@
 .archive-header .archive-lables {
     font-size: 14px;
     display: flex;
-    margin-right: 27%;
+    margin-right: 23%;
 }
 
 .archive-lables .date {
-    margin-right: 40%;
+    margin-right: 42%;
 }
 
 .archive-lables .data-type {
-    margin-right: 6%;
+    margin-right: 5.5%;
 }
 
 .archive-lables .file-length {
-    margin-right: 5%;
+    margin-right: 3.5%;
 }
