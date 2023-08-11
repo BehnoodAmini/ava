@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReactPaginate from "react-paginate";
 
 import { data } from '../../assets/dummydata/data';
+import AudioUploaded from "../AudioUploaded/AudioUploaded";
 
 import './ArchiveList.css';
 
@@ -26,6 +27,7 @@ const ArchiveList = () => {
   const [currentPage, setCurrentPage] = useState(0);
   //const [data, setData] = useState<data[]>(archiveDummyData);
   const [itemsPerPage] = useState(8);
+  const [showFileAudio, setShowFileAudio] = useState(false);
 
   // the number of items to display per page
   /*useEffect(() => {
@@ -49,6 +51,9 @@ const ArchiveList = () => {
   // get the items for the current page
   const currentPageItems = data.slice(startIndex, endIndex);
 
+  const handleShowFile = event => {
+    setShowFileAudio(!showFileAudio);
+  }
   // open/close ai file
   /*const onItemClick = (itemId) => {
     setData((prevItems) =>
@@ -61,9 +66,10 @@ const ArchiveList = () => {
   };*/
 
   function formatDuration(value) {
-    const minute = Math.floor(value / 60);
-    const secondLeft = value - minute * 60;
-    return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
+    const hour = Math.floor(value / 3600);
+    const minuteLeft = Math.floor((value % 3600) / 60);
+    const secondLeft = value % 60;
+    return `${hour > 0 ? `${hour}:` : ``}${minuteLeft > 0 ? `${minuteLeft}:` : ``}${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
   }
 
   return (
@@ -72,7 +78,11 @@ const ArchiveList = () => {
       <div className="archive-files-container">
         {currentPageItems.map((data, key) => {
           return (
-            <div className="archive-file" key={key}>
+            <div
+              className={`${data.id === showFileAudio ? "archive-file-active" : "archive-file-inactive"}`}
+              key={key}
+              onClick={e => setShowFileAudio(data.id)}
+            >
               <img
                 className="sendtype-icon"
                 src={data.sendType === "record"
@@ -91,7 +101,7 @@ const ArchiveList = () => {
                 {data.createdAt}
               </span>
               <span className="archive-file-type">
-                {data.voiceType}
+                {data.voiceType}.
               </span>
               <span className="archive-file-duration">
                 {formatDuration(data.duration)}
@@ -122,7 +132,8 @@ const ArchiveList = () => {
                   className="archive-del-icon"
                   src={DelIcon}
                   alt="delete-icon"
-          />*/}
+          />*/} 
+          {data.id === showFileAudio && <AudioUploaded />}
               </div>
             </div>
           );

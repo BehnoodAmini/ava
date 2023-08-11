@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-import AudioUploaded from "./AudioUploaded";
+import AudioUploaded from "../AudioUploaded/AudioUploaded";
 import LanguageDropdown from "../dropdowns/LanguageDropdown";
 import "./Upload.css";
 
