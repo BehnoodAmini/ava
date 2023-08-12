@@ -1,14 +1,25 @@
+import { Route, Routes } from 'react-router-dom';
+
 import './App.css';
 
-//import MainPage from './components/MainPage/MainPage';
+import MainPage from './components/MainPage/MainPage';
 import SecondaryPage from './components/SecondaryPage/SecondaryPage';
 
 function App() {
   return (
     <div className="App">
-      {/* CHANGE THE COMMENT TO SEE EACH PAGE PLEASE */}
-      {/*<MainPage />*/}
-      <SecondaryPage />
+      <Routes>
+        <Route
+          path='/'
+          element={<MainPage />}
+        />
+        <Route
+          path='/archive'
+          element={<SecondaryPage />}
+        />
+      </Routes>
+      {/*<MainPage />
+      <SecondaryPage />*/}
     </div>
   );
 }

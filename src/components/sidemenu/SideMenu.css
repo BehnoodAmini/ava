@@ -107,33 +107,48 @@
   width: 150px;
 }
 
-/*.side-menu .title {
-    height: 28px;
-    left: 18px;
-    position: relative;
-    top: 11px;
-    width: 113px;
-  }*/
-
-.side-menu .text-wrapper {
-  color: #ffffff;
-  direction: rtl;
-  font-family: 'IRANYekan';
-  font-size: large;
-  font-weight: bold;
-  position: absolute;
-  height: 28px;
-  width: 111px;
-  top: 7px;
-  left: 70px;
-}
-
 .side-menu .speech-icon {
   height: 25px;
   position: absolute;
   width: 22px;
-  top: 2px;
-  left: 50px;
+  margin-left: 6rem;
+}
+
+.side-menu .goftar-text {
+  color: #ffffff;
+  direction: rtl;
+  font-family: 'IRANYekan';
+  font-size: large;
+  position: absolute;
+  height: 28px;
+  width: 111px;
+  top: 7px;
+  margin-right: 2rem;
+}
+
+.side-menu a.goftar-active {
+  background-color: #01806e;
+  border-radius: 10px;
+  height: 48px;
+  left: 172px;
+  position: absolute;
+  top: 277px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.side-menu a.goftar-inactive {
+  border-radius: 10px;
+  height: 48px;
+  left: 172px;
+  position: absolute;
+  top: 277px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .side-menu .archive {
@@ -149,41 +164,42 @@
   height: 20px;
   position: absolute;
   width: 20px;
-  top: 5px;
+  margin-left: 6rem;
 }
 
-/*.side-menu .element-2 {
-    color: #ffffff;
-    direction: rtl;
-    font-size: 16px;
-    font-weight: 400;
-    left: 0;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 0;
-  }*/
-
-  .side-menu button {
-  background-color: transparent;
-  border-color: transparent;
-  justify-content: center;
-  height: 48px;
-  width: 150px;
-  margin-right: 7px;
+.side-menu .archive-text {
+  color: #ffffff;
+  direction: rtl;
+  font-family: 'IRANYekan';
+  font-size: large;
+  position: absolute;
+  height: 28px;
+  width: 111px;
+  top: 7px;
+  margin-right: 2rem;
 }
 
-.side-menu button:hover {
+.side-menu a.archive-active {
   background-color: #01806e;
   border-radius: 10px;
   height: 48px;
-  width: 150px;
+  left: 172px;
   position: absolute;
-  /*left: 70px;
-  top: 277px;*/
+  top: 364px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.side-menu .text {
-  margin-right: 60px;
-  width: 111px;
+.side-menu a.archive-inactive {
+  border-radius: 10px;
+  height: 48px;
+  left: 172px;
+  position: absolute;
+  top: 364px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

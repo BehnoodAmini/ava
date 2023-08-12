@@ -1,4 +1,6 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+
 import "./SideMenu.css";
 
 import alefba from '../../assets/images/alefba-group-1.png';
@@ -41,28 +43,30 @@ const SideMenu = ({ className }) => {
             />
           </div>
         </div>
-          <button className="goftar">
-            <div className="text-wrapper">
+        <NavLink
+          className={({ isActive }) => (isActive ? 'goftar-active' : 'goftar-inactive')}
+          to={'/'}
+        >
               <img
                 className="speech-icon"
                 alt="Speech icon"
                 src={speechIcon}
               />
-              <div className="text">تبدیل گفتار</div>
-            </div>
-          </button>
-          <button className="archive">
-            <div className="text-wrapper">
+              <div className="goftar-text">تبدیل گفتار</div>
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? 'archive-active' : 'archive-inactive')}
+          to={'/archive'}
+        >
               <img
                 className="archive-icon"
                 alt="Archive icon"
                 src={archiveIcon}
               />
-              <div className="text">آرشیو</div>
-            </div>
-          </button>
+              <div className="archive-text">آرشیو</div>
+        </NavLink>
       </div>
-    </div>
+    </div >
   );
 };
 
