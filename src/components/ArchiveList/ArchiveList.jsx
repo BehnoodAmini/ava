@@ -23,14 +23,12 @@ const ArchiveList = () => {
 
   const pageCount = Math.ceil(data.length / itemsPerPage);
 
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentPageItems = data.slice(startIndex, endIndex);
   const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage.selected);
   };
-
-  const startIndex = currentPage * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-
-  const currentPageItems = data.slice(startIndex, endIndex);
 
   function formatDuration(value) {
     const hour = Math.floor(value / 3600);
@@ -126,9 +124,11 @@ const ArchiveList = () => {
           );
         })}
       </div>
-      
+
       <div className="pagination-container">
         <ReactPaginate
+          containerClassName={"pagination"}
+          activeClassName={"active"}
           previousLabel={<RightArrowIcon />}
           nextLabel={<LeftArrowIcon />}
           breakLabel={"..."}
@@ -137,8 +137,6 @@ const ArchiveList = () => {
           marginPagesDisplayed={1}
           pageRangeDisplayed={3}
           onPageChange={handlePageChange}
-          containerClassName={"pagination"}
-          activeClassName={"active"}
         />
       </div>
     </div>
