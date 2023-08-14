@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import AudioUploaded from "../AudioUploaded/AudioUploaded";
 import LanguageDropdown from "../dropdowns/LanguageDropdown";
@@ -12,6 +12,8 @@ import uploadIconGray from "../../assets/images/upload-icon-gray.svg";
 import linkIconWhite from "../../assets/images/chain-icon-white.svg";
 import linkIconGray from "../../assets/images/chain-icon-gray.svg";
 
+const mimeType = "audio/webm";
+
 const Upload = (props) => {
 
     const [isShownRecord, setIsShownRecord] = useState(true);
@@ -19,6 +21,14 @@ const Upload = (props) => {
     const [isShownLink, setIsShownLink] = useState(false);
     const [fileAudio, setFileAudio] = useState(false);
     //const [isUploaded, setIsUploaded] = useState(false)
+
+    // for RECORDING
+    const [permission, setPermission] = useState(false);
+    const mediaRecorder = useRef(null);
+    const [recordingStatus, setRecordingStatus] = useState("inactive");
+    const [stream, setStream] = useState(null);
+    const [audio, setAudio] = useState(null);
+    const [audioChunks, setAudioChunks] = useState([]);
 
     const handleClickRecord = event => {
         setIsShownRecord(true);
@@ -36,6 +46,58 @@ const Upload = (props) => {
         setIsShownLink(true);
     };
 
+    // FOR RECORDING
+    const getMicrophonePermission = async () => {
+        if ("MediaRecorder" in window) {
+            try {
+                const mediaStream = await navigator.mediaDevices.getUserMedia({
+                    audio: true,
+                    video: false,
+                });
+                setPermission(true);
+                setStream(mediaStream);
+            } catch (err) {
+                alert(err.message);
+            }
+        } else {
+            alert("The MediaRecorder API is not supported in your browser.");
+        }
+    };
+
+    const startRecording = async () => {
+        setRecordingStatus("recording");
+        const media = new MediaRecorder(stream, { type: mimeType });
+
+        mediaRecorder.current = media;
+
+        mediaRecorder.current.start();
+
+        let localAudioChunks = [];
+
+        mediaRecorder.current.ondataavailable = (event) => {
+            if (typeof event.data === "undefined") return;
+            if (event.data.size === 0) return;
+            localAudioChunks.push(event.data);
+        };
+
+        setAudioChunks(localAudioChunks);
+    };
+
+    const stopRecording = () => {
+        setRecordingStatus("inactive");
+        mediaRecorder.current.stop();
+
+        mediaRecorder.current.onstop = () => {
+            const audioBlob = new Blob(audioChunks, { type: mimeType });
+            const audioUrl = URL.createObjectURL(audioBlob);
+
+            setAudio(audioUrl);
+
+            setAudioChunks([]);
+
+            setFileAudio(true);
+        };
+    };
     //  FOR USING A BUTTON AS AN FILE INPUT
     const hiddenFileInput = React.useRef(null);
     const handleClick = event => {
@@ -97,23 +159,44 @@ const Upload = (props) => {
                 </div>
 
                 {isShownRecord &&
-                    <div className="center-mic">
-                        <button className="center-mic-icon">
-                            <img
-                                className="center-micIcon"
-                                src={micIconWhite}
-                                alt="micIcon"
-                            />
-                        </button>
-                        <div className="center-mic-text">
-                            برای شروع به صحبت، دکمه را فشار دهید <br />
-                            متن پیاده شده آن، در اینجا ظاهر شود
+                    fileAudio
+                    ? <div><AudioUploaded color="#00BA9F" audio={audio} /></div>
+                    : (
+                        <div className="center-mic">
+                            {!permission ? (
+                                <button className="permission" onClick={ getMicrophonePermission }>
+                                    به میکروفون اجازه دسترسی دهید.<br />
+                                    (اگر قبلا اجازه داده اید فقط کلیک کنید!)
+                                </button>
+                            ) : null}
+                            {permission && recordingStatus === "inactive" ? (
+                                <button className="center-mic-icon" onClick={startRecording}>
+                                    <img
+                                        className="center-micIcon"
+                                        src={micIconWhite}
+                                        alt="micIcon"
+                                    />
+                                </button>
+                            ) : null}
+                            {recordingStatus === "recording" ? (
+                                <button className="center-mic-icon-recording" onClick={stopRecording}>
+                                    <img
+                                        className="center-micIcon"
+                                        src={micIconWhite}
+                                        alt="micIcon"
+                                    />
+                                </button>
+                            ) : null}
+                            <div className="center-mic-text">
+                                برای شروع به صحبت، دکمه را فشار دهید <br />
+                                متن پیاده شده آن، در اینجا ظاهر شود
+                            </div>
                         </div>
-                    </div>
+                    )
                 }
                 {isShownUpload && (
                     fileAudio
-                        ? <div><AudioUploaded color="#118AD3"/></div>
+                        ? <div><AudioUploaded color="#118AD3" /></div>
                         : (
                             <div className="center-upload">
                                 <button className="center-upload-icon" onClick={handleClick}>

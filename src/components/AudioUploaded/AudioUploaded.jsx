@@ -151,7 +151,7 @@ const AudioUploaded = props => {
             </SimpleBarReact>
             <div className="footer">
                 <div className="voice-bar">
-                    <VoiceBar />
+                    <VoiceBar {...props}/>
                 </div>
             </div>
         </div >

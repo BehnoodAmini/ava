@@ -93,7 +93,10 @@ const VoiceBar = (props) => {
                 <IconButton
                     className="stop"
                     aria-label={paused ? "play" : "pause"}
-                    onClick={() => setPaused(true)}
+                    onClick={() => {
+                        setPaused(true);
+                        setPosition(0)
+                    }}
                 >
                     <StopIcon sx={{ fontSize: "1rem" }} />
                 </IconButton>

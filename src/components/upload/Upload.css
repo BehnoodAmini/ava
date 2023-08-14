@@ -104,6 +104,14 @@
     padding-top: 25%;
 }
 
+.center-mic .permission {
+    font-family: 'IRANYekan';
+    background-color: #00BA9F;
+    border-color: transparent;
+    border-radius: 10px;
+    color: #303030;
+}
+
 .center-mic .center-mic-icon {
     height: 62px;
     width: 62px;
@@ -114,6 +122,31 @@
     padding-top: 2%;
 }
 
+.center-mic .center-mic-icon-recording {
+    height: 62px;
+    width: 62px;
+    border-color: transparent;
+    border-radius: 31px;
+    box-shadow: 0px 4px 4px #00000040;
+    background-color: #00BA9F;
+    padding-top: 2%;
+    animation-name: pulse;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+@keyframes pulse{
+	0%{
+		box-shadow: 0px 0px 5px 0px rgba(0,186,159,.3);
+	}
+	65%{
+		box-shadow: 0px 0px 5px 13px rgba(0,186,159,.3);
+	}
+	90%{
+		box-shadow: 0px 0px 5px 13px rgba(0, 186, 158, 0.467);
+	}
+}
+
 .center-mic .center-micIcon {
     height: 40px;
     width: 29px;
@@ -121,6 +154,7 @@
 
 .center-mic .center-mic-text {
     color: #626262;
+    margin-top: 1rem;
 }
 
 .box .center-upload {
