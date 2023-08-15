@@ -17,7 +17,7 @@ import copyIcon from "../../assets/images/gray-copy-icon.svg";
 import refreshIcon from "../../assets/images/refresh-icon.svg";
 import hr from "../../assets/images/horizontal-line.svg"
 
-const AudioUploaded = props => {
+const AudioUploaded = (props) => {
 
     const [simpleIsShown, setSimpleIsShown] = useState(true);
     const [timeIsShown, setTimeIsShown] = useState(false);
@@ -37,8 +37,20 @@ const AudioUploaded = props => {
         return `${minute < 10 ? `0${minute}` : minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
     }
 
+    // FOR BORDER OF RECORD, UPLOAD AND LINK
+    const styles = props.isShownRecord ? {
+        border: `1px solid ${props.color}`,
+        borderRadius: '25px 0 25px 25px',
+    } : props.isShownUpload ? {
+        border: `1px solid ${props.color}`,
+        borderRadius: '25px',
+    } : null;
+
     return (
-        <div className="center-uploaded">
+        <div 
+        className="center-uploaded"
+        style={styles}
+        >
             <div className="upload-navbar">
                 <div className="upload-navbar-right">
                     <button

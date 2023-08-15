@@ -29,21 +29,35 @@ const Upload = (props) => {
     const [stream, setStream] = useState(null);
     const [audio, setAudio] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
+    const [duration, setDuration] = useState(0);
+    const audioRef = useRef(null);
 
     const handleClickRecord = event => {
         setIsShownRecord(true);
         setIsShownUpload(false);
         setIsShownLink(false);
+
+        if (!isShownRecord) {
+            setFileAudio(false);
+        }
     };
     const handleClickUpload = event => {
         setIsShownRecord(false);
         setIsShownUpload(true);
         setIsShownLink(false);
+
+        if (!isShownUpload) {
+            setFileAudio(false);
+        }
     };
     const handleClickLink = event => {
         setIsShownRecord(false);
         setIsShownUpload(false);
         setIsShownLink(true);
+
+        if (!isShownLink) {
+            setFileAudio(false);
+        }
     };
 
     // FOR RECORDING
@@ -96,8 +110,23 @@ const Upload = (props) => {
             setAudioChunks([]);
 
             setFileAudio(true);
+
+            // FOR DURATION OF RECORDED VOICE
+            const fileReader = new FileReader();
+            fileReader.onloadend = () => {
+                const audioContext = new window.AudioContext();
+                const arrayBuffer = fileReader.result;
+
+                audioContext.decodeAudioData(arrayBuffer, (buffer) => {
+                    const durationInSeconds = buffer.duration;
+                    setDuration(durationInSeconds);
+                });
+            };
+
+            fileReader.readAsArrayBuffer(audioBlob);
         };
     };
+
     //  FOR USING A BUTTON AS AN FILE INPUT
     const hiddenFileInput = React.useRef(null);
     const handleClick = event => {
@@ -158,45 +187,55 @@ const Upload = (props) => {
                     </button>
                 </div>
 
-                {isShownRecord &&
+                {isShownRecord && (
                     fileAudio
-                    ? <div><AudioUploaded color="#00BA9F" audio={audio} /></div>
-                    : (
-                        <div className="center-mic">
-                            {!permission ? (
-                                <button className="permission" onClick={ getMicrophonePermission }>
-                                    به میکروفون اجازه دسترسی دهید.<br />
-                                    (اگر قبلا اجازه داده اید فقط کلیک کنید!)
-                                </button>
-                            ) : null}
-                            {permission && recordingStatus === "inactive" ? (
-                                <button className="center-mic-icon" onClick={startRecording}>
-                                    <img
-                                        className="center-micIcon"
-                                        src={micIconWhite}
-                                        alt="micIcon"
-                                    />
-                                </button>
-                            ) : null}
-                            {recordingStatus === "recording" ? (
-                                <button className="center-mic-icon-recording" onClick={stopRecording}>
-                                    <img
-                                        className="center-micIcon"
-                                        src={micIconWhite}
-                                        alt="micIcon"
-                                    />
-                                </button>
-                            ) : null}
-                            <div className="center-mic-text">
-                                برای شروع به صحبت، دکمه را فشار دهید <br />
-                                متن پیاده شده آن، در اینجا ظاهر شود
+                        ? <div><AudioUploaded
+                            isShownRecord={isShownRecord}
+                            color="#00BA9F"
+                            audio={audio}
+                            duration={duration}
+                            audioRef={audioRef}
+                        /></div>
+                        : (
+                            <div className="center-mic">
+                                {!permission ? (
+                                    <button className="permission" onClick={getMicrophonePermission}>
+                                        به میکروفون اجازه دسترسی دهید.<br />
+                                        (اگر قبلا اجازه داده اید فقط کلیک کنید!)
+                                    </button>
+                                ) : null}
+                                {permission && recordingStatus === "inactive" ? (
+                                    <button className="center-mic-icon" onClick={startRecording}>
+                                        <img
+                                            className="center-micIcon"
+                                            src={micIconWhite}
+                                            alt="micIcon"
+                                        />
+                                    </button>
+                                ) : null}
+                                {recordingStatus === "recording" ? (
+                                    <button className="center-mic-icon-recording" onClick={stopRecording}>
+                                        <img
+                                            className="center-micIcon"
+                                            src={micIconWhite}
+                                            alt="micIcon"
+                                        />
+                                    </button>
+                                ) : null}
+                                <div className="center-mic-text">
+                                    برای شروع به صحبت، دکمه را فشار دهید <br />
+                                    متن پیاده شده آن، در اینجا ظاهر شود
+                                </div>
                             </div>
-                        </div>
-                    )
-                }
+                        )
+                )}
+
                 {isShownUpload && (
                     fileAudio
-                        ? <div><AudioUploaded color="#118AD3" /></div>
+                        ? <div><AudioUploaded
+                            color="#118AD3"
+                            isShownUpload={isShownUpload}
+                        /></div>
                         : (
                             <div className="center-upload">
                                 <button className="center-upload-icon" onClick={handleClick}>
@@ -218,7 +257,6 @@ const Upload = (props) => {
                                 </div>
                             </div>
                         ))}
-
 
                 {isShownLink &&
                     <div className="center-link">

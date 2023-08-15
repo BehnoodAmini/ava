@@ -1,5 +1,5 @@
 import "./VoiceBar.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Slider from "@mui/material/Slider";
 import IconButton from "@mui/material/IconButton";
@@ -9,9 +9,49 @@ import StopIcon from "@mui/icons-material/Stop";
 import VolumeUpRounded from "@mui/icons-material/VolumeUpRounded";
 
 const VoiceBar = (props) => {
-    const duration = 200; // seconds
     const [position, setPosition] = useState(0);
     const [paused, setPaused] = useState(true);
+
+    useEffect(() => {
+        if (!paused) {
+            const voice = props.audioRef.current;
+            const updateCurrentTime = () => {
+                const currentTime = voice?.currentTime;
+                currentTime && setPosition(Math.ceil(currentTime));
+            };
+            voice?.addEventListener("timeupdate", updateCurrentTime);
+            return () => {
+                voice?.removeEventListener("timeupdate", updateCurrentTime);
+            };
+        }
+    }, [paused, props.audioRef]);
+
+    const positionHandler = (value) => {
+        setPosition(value);
+        if (props.audioRef.current) {
+            props.audioRef.current.currentTime = value;
+        }
+    };
+
+    const playAudioHandler = () => {
+        if (paused) {
+            props.audioRef.current?.play()
+        } else {
+            props.audioRef.current?.pause();
+        }
+    };
+
+    const resetAudioHandle = () => {
+        if (props.audioRef.current) {
+            props.audioRef.current.currentTime = 0;
+            props.audioRef.current.pause();
+
+            setPaused(true);
+            setPosition(null);
+        }
+    };
+
+
     function formatDuration(value) {
         const minute = Math.floor(value / 60);
         const secondLeft = value - minute * 60;
@@ -19,6 +59,12 @@ const VoiceBar = (props) => {
     }
     return (
         <div className="voice-bar">
+            <audio
+                src={props.audio}
+                ref={props.audioRef}
+                onEnded={() => setPaused(true)}
+                hidden
+            ></audio>
             <div className="volume-bar">
                 <Slider
                     aria-label="Volume"
@@ -41,15 +87,19 @@ const VoiceBar = (props) => {
                     <VolumeUpRounded />
                 </div>
             </div>
-            <div className="duration">{formatDuration(position)}</div>
+            <div className="duration">
+                {!position
+                    ? formatDuration(Math.ceil(props.duration ? props.duration : 0))
+                    : formatDuration(position)
+                }
+            </div>
             <Slider
                 aria-label="time-indicator"
                 size="small"
                 value={position}
                 min={0}
-                step={1}
-                max={duration}
-                onChange={(_, value) => setPosition(value)}
+                max={Math.ceil(props.duration ? props.duration : 0)}
+                onChange={(_, value) => positionHandler(value)}
                 sx={{
                     width: "25rem",
                     height: 4,
@@ -82,7 +132,10 @@ const VoiceBar = (props) => {
                 <IconButton
                     className="play-pause"
                     aria-label={paused ? "play" : "pause"}
-                    onClick={() => setPaused(!paused)}
+                    onClick={() => {
+                        setPaused(!paused);
+                        playAudioHandler();
+                    }}
                 >
                     {paused ? (
                         <PlayArrowRounded sx={{ fontSize: "1rem" }} />
@@ -93,10 +146,7 @@ const VoiceBar = (props) => {
                 <IconButton
                     className="stop"
                     aria-label={paused ? "play" : "pause"}
-                    onClick={() => {
-                        setPaused(true);
-                        setPosition(0)
-                    }}
+                    onClick={resetAudioHandle}
                 >
                     <StopIcon sx={{ fontSize: "1rem" }} />
                 </IconButton>
