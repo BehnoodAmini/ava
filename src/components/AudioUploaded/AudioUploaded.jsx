@@ -31,6 +31,11 @@ const AudioUploaded = (props) => {
         setTimeIsShown(true);
     }
 
+    // FOR REFRESH BUTTON
+    const handleRefresh = event => {
+        props.setFileAudio(false);
+    }
+
     function formatDuration(value) {
         const minute = Math.floor(value / 60);
         const secondLeft = value - minute * 60;
@@ -47,9 +52,9 @@ const AudioUploaded = (props) => {
     } : null;
 
     return (
-        <div 
-        className="center-uploaded"
-        style={styles}
+        <div
+            className="center-uploaded"
+            style={styles}
         >
             <div className="upload-navbar">
                 <div className="upload-navbar-right">
@@ -125,7 +130,11 @@ const AudioUploaded = (props) => {
                             alt="copy-icon"
                         />
                     </button>
-                    <button className="refresh-button" style={{ backgroundColor: props.color }}>
+                    <button
+                        className="refresh-button"
+                        onClick={handleRefresh}
+                        style={{ backgroundColor: props.color }}
+                    >
                         <img
                             className="refresh-icon"
                             src={refreshIcon}
@@ -163,7 +172,7 @@ const AudioUploaded = (props) => {
             </SimpleBarReact>
             <div className="footer">
                 <div className="voice-bar">
-                    <VoiceBar {...props}/>
+                    <VoiceBar {...props} />
                 </div>
             </div>
         </div >

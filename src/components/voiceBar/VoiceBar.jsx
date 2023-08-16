@@ -10,6 +10,7 @@ import VolumeUpRounded from "@mui/icons-material/VolumeUpRounded";
 
 const VoiceBar = (props) => {
     const [position, setPosition] = useState(0);
+    const [volume, setVolume] = useState(30);
     const [paused, setPaused] = useState(true);
 
     useEffect(() => {
@@ -25,6 +26,13 @@ const VoiceBar = (props) => {
             };
         }
     }, [paused, props.audioRef]);
+
+    const handleVolumeChange = (value) => {
+        if (props.audioRef.current) {
+          setVolume(value);
+          props.audioRef.current.volume = value / 100;
+        }
+      };
 
     const positionHandler = (value) => {
         setPosition(value);
@@ -69,6 +77,10 @@ const VoiceBar = (props) => {
                 <Slider
                     aria-label="Volume"
                     defaultValue={30}
+                    value={volume}
+                    onChange={(_, value) => {
+                        return handleVolumeChange(value);
+                    }}
                     sx={{
                         "& .MuiSlider-track": {
                             border: "none",
@@ -88,8 +100,8 @@ const VoiceBar = (props) => {
                 </div>
             </div>
             <div className="duration">
-                {!position
-                    ? formatDuration(Math.ceil(props.duration ? props.duration : 0))
+                {!position ?
+                      formatDuration(Math.ceil(props.duration ? props.duration : 0))
                     : formatDuration(position)
                 }
             </div>
@@ -99,7 +111,9 @@ const VoiceBar = (props) => {
                 value={position}
                 min={0}
                 max={Math.ceil(props.duration ? props.duration : 0)}
-                onChange={(_, value) => positionHandler(value)}
+                onChange={(_, value) => {
+                    return positionHandler(value);
+                }}
                 sx={{
                     width: "25rem",
                     height: 4,

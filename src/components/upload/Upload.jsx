@@ -191,6 +191,7 @@ const Upload = (props) => {
                     fileAudio
                         ? <div><AudioUploaded
                             isShownRecord={isShownRecord}
+                            setFileAudio={setFileAudio}
                             color="#00BA9F"
                             audio={audio}
                             duration={duration}
@@ -235,6 +236,7 @@ const Upload = (props) => {
                         ? <div><AudioUploaded
                             color="#118AD3"
                             isShownUpload={isShownUpload}
+                            setFileAudio={setFileAudio}
                         /></div>
                         : (
                             <div className="center-upload">
