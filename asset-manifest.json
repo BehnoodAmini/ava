@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ava/static/css/main.272cfe4c.css",
-    "main.js": "/ava/static/js/main.79821b3c.js",
+    "main.js": "/ava/static/js/main.1e0c4deb.js",
     "static/css/628.8ba4dcc8.chunk.css": "/ava/static/css/628.8ba4dcc8.chunk.css",
     "static/js/628.37ca2b0a.chunk.js": "/ava/static/js/628.37ca2b0a.chunk.js",
     "static/css/728.219faedf.chunk.css": "/ava/static/css/728.219faedf.chunk.css",
     "static/js/728.a4f7e8d2.chunk.js": "/ava/static/js/728.a4f7e8d2.chunk.js",
     "static/js/787.479a9f1a.chunk.js": "/ava/static/js/787.479a9f1a.chunk.js",
-    "static/js/762.0b740288.chunk.js": "/ava/static/js/762.0b740288.chunk.js",
+    "static/js/467.ea942f33.chunk.js": "/ava/static/js/467.ea942f33.chunk.js",
     "static/js/304.49e67664.chunk.js": "/ava/static/js/304.49e67664.chunk.js",
     "static/media/alefba-group-1.png": "/ava/static/media/alefba-group-1.7ee2d22845247c3aad9c.png",
     "static/media/mic-icon-white.svg": "/ava/static/media/mic-icon-white.475705f3160244094a7df8b1e84fee2b.svg",
@@ -40,17 +40,17 @@
     "static/media/line-1-1.svg": "/ava/static/media/line-1-1.2afe8d8231a4d6008694caa76fd6bccb.svg",
     "static/media/line-2-1.svg": "/ava/static/media/line-2-1.914784ca3e916564d0c3709c021f0b3c.svg",
     "main.272cfe4c.css.map": "/ava/static/css/main.272cfe4c.css.map",
-    "main.79821b3c.js.map": "/ava/static/js/main.79821b3c.js.map",
+    "main.1e0c4deb.js.map": "/ava/static/js/main.1e0c4deb.js.map",
     "628.8ba4dcc8.chunk.css.map": "/ava/static/css/628.8ba4dcc8.chunk.css.map",
     "628.37ca2b0a.chunk.js.map": "/ava/static/js/628.37ca2b0a.chunk.js.map",
     "728.219faedf.chunk.css.map": "/ava/static/css/728.219faedf.chunk.css.map",
     "728.a4f7e8d2.chunk.js.map": "/ava/static/js/728.a4f7e8d2.chunk.js.map",
     "787.479a9f1a.chunk.js.map": "/ava/static/js/787.479a9f1a.chunk.js.map",
-    "762.0b740288.chunk.js.map": "/ava/static/js/762.0b740288.chunk.js.map",
+    "467.ea942f33.chunk.js.map": "/ava/static/js/467.ea942f33.chunk.js.map",
     "304.49e67664.chunk.js.map": "/ava/static/js/304.49e67664.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.272cfe4c.css",
-    "static/js/main.79821b3c.js"
+    "static/js/main.1e0c4deb.js"
   ]
 }
