@@ -39,6 +39,7 @@
   width: 121px;
   height: 37px;
   position: absolute;
+  transition: height 1s;
 }
 
 .language .language-open-border {
@@ -49,6 +50,8 @@
   border-color: #00ba9f;
   border-radius: 20px;
   background-color: #fdfdfd;
+  transition: height 1s;
+  overflow-y: hidden;
 }
 
 .language .language-text-wrapper {
@@ -111,7 +114,7 @@
   font-family: "IRANYekan";
   font-size: 15px;
   font-weight: 400;
-  left: 32px;
+  left: 1.5rem;
   position: absolute;
   background-color: #fdfdfd;
   border-color: transparent;

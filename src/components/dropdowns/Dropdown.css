@@ -39,6 +39,7 @@
   width: 123px;
   top: 48px;
   left: 47px;
+  transition: height 1s;
 }
 
 .box .text-wrapper {
@@ -120,6 +121,8 @@
   border-color: #00ba9f;
   border-radius: 20px;
   background-color: #fdfdfd;
+  transition: height 1s;
+  overflow-y: hidden;
 }
 
 .box .logout-button {
