@@ -104,9 +104,12 @@ const RecordVoiceAndUpload = (
             : (
                 <div className="center-mic">
                     {!permission ? (
-                        <button className="permission" onClick={getMicrophonePermission}>
-                            به میکروفون اجازه دسترسی دهید.<br />
-                            (اگر قبلا اجازه داده اید فقط کلیک کنید!)
+                        <button className="center-mic-icon" onClick={getMicrophonePermission}>
+                            <img
+                                className="center-micIcon"
+                                src={micIconWhite}
+                                alt="micIcon"
+                            />
                         </button>
                     ) : null}
                     {permission && recordingStatus === "inactive" ? (

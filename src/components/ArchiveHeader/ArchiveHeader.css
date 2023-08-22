@@ -13,17 +13,37 @@
 .archive-header .archive-lables {
     font-size: 14px;
     display: flex;
-    margin-right: 23%;
+    text-align: center;
+    justify-content: center;
+    width: 70rem;
+    position: absolute;
+    right: 18rem;
+}
+
+.archive-lables .first-blank {
+    flex: 1;
+}
+
+.archive-lables .file-name {
+    flex: 5.4;
+    text-align: right;
 }
 
 .archive-lables .date {
-    margin-right: 42%;
+    flex: 1.7;
+    text-align: center;
 }
 
 .archive-lables .data-type {
-    margin-right: 5.5%;
+    flex: 1;
+    text-align: center;
 }
 
 .archive-lables .file-length {
-    margin-right: 3.5%;
+    flex: 1.1;
+    text-align: center;
+}
+
+.archive-lables .last-blank {
+    flex: 1.8;
 }
