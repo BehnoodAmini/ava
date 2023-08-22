@@ -43,7 +43,7 @@
 }
 
 .upload-navbar-right .timed-text-button {
-    width: 150px;
+    width: 170px;
     flex-direction: row;
     display: inline-flex;
     font-family: "IRANYekan";
@@ -86,6 +86,11 @@
     border-color: transparent;
 }
 
+.upload-navbar-left .download-icon {
+    width: 14px;
+    height: 15px;
+}
+
 .upload-navbar-left .copy {
     width: 50px;
     flex-direction: row;
@@ -97,6 +102,11 @@
     top: 75%;
     border-color: transparent;
     margin-left: 5%;
+}
+
+.upload-navbar-left .copy-icon {
+    width: 16px;
+    height: 18px;
 }
 
 .upload-navbar-left .refresh-button {
@@ -172,4 +182,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.center-uploaded .hr{
+    width: 605px;
+    height: 10px;
 }
