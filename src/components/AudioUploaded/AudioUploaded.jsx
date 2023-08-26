@@ -150,7 +150,7 @@ const AudioUploaded = (props) => {
             <SimpleBarReact style={{ maxHeight: 300, direction: 'rtl', scrollbarMinSize: 1 }} data-simplebar-direction='rtl' >
                 <div className="center-box">
                     {simpleIsShown
-                        ? (<div className="text-box"></div>)
+                        ? (<div className="text-box">{props.dataFromApi}</div>)
                         : (
                             testList.map((data, key) => {
                                 return (

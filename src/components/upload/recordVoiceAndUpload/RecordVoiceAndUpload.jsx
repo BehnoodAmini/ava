@@ -1,11 +1,14 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import axios from "axios";
 
 import AudioUploaded from "../../AudioUploaded/AudioUploaded";
 import './RecordVoiceAndUpload.css';
 
 import micIconWhite from "../../../assets/images/mic-icon-white.svg";
 
-const mimeType = "audio/webm";
+const mimeType = "audio/webm;codecs=opus";
+const url = "https://harf.roshan-ai.ir/api/transcribe_files/";
+const token = localStorage.getItem("Token");
 
 const RecordVoiceAndUpload = (
     { isShownRecord,
@@ -23,6 +26,7 @@ const RecordVoiceAndUpload = (
     const [recordingStatus, setRecordingStatus] = useState("inactive");
     const [stream, setStream] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
+    const [dataFromApi, setDataFromApi] = useState(null);
 
     //GETTING RECORDING PERMISSION FOR DOMAIN IN BROWSER
     const getMicrophonePermission = async () => {
@@ -91,6 +95,35 @@ const RecordVoiceAndUpload = (
         };
     };
 
+    
+    useEffect(() => {
+        if (audio) {
+            postAudio(audio);
+        }
+    }, [fileAudio, audio]);
+
+    const postAudio = async (audio) => {
+        const formData = new FormData();
+        formData.append("media", audio);
+        formData.append("language", "fa");
+    
+        try {
+          const res = await axios.post(url, formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Token ${token}`,
+              },
+            }
+          );
+            
+          console.log(res.data);
+          setDataFromApi(res.data[0].segments);
+        } catch (error) {
+          console.error("Error uploading audio:", error);
+        }
+      };
+
+
     return (
         fileAudio
             ? <div><AudioUploaded
@@ -99,6 +132,7 @@ const RecordVoiceAndUpload = (
                 audio={audio}
                 duration={duration}
                 audioRef={audioRef}
+                dataFromApi={dataFromApi}
                 color="#00BA9F"
             /></div>
             : (
