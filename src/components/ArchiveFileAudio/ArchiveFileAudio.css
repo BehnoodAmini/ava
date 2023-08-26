@@ -14,7 +14,7 @@
 }
 
 .archive-upload-navbar .archive-simple-text-button {
-    width: 100px;
+    width: 110px;
     flex-direction: row;
     display: inline-flex;
     font-family: "IRANYekan";
@@ -30,6 +30,8 @@
     margin-left: 10px;
     position: relative;
     bottom: 7px;
+    width: 17px;
+    height: 17px;
 }
 
 .archive-upload-navbar .simple-text {
@@ -38,7 +40,7 @@
 }
 
 .archive-upload-navbar .timed-text-button {
-    width: 150px;
+    width: 155px;
     flex-direction: row;
     display: inline-flex;
     font-family: "IRANYekan";
@@ -56,6 +58,8 @@
     margin-left: 5px;
     position: relative;
     bottom: 7px;
+    width: 17px;
+    height: 17px;
 }
 
 .archive-upload-navbar .timed-text {
@@ -65,8 +69,9 @@
 }
 
 .archive-center-uploaded .hr {
-    margin-left: 60%;
+    margin-left: 37rem;
     margin-top: -2rem;
+    width: 272px;
 }
 
 .archive-center-uploaded .archive-center-box {
