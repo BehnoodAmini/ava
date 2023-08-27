@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 
 import AudioUploaded from "../../AudioUploaded/AudioUploaded";
@@ -8,7 +8,7 @@ import micIconWhite from "../../../assets/images/mic-icon-white.svg";
 
 const mimeType = "audio/webm;codecs=opus";
 const url = "https://harf.roshan-ai.ir/api/transcribe_files/";
-const token = localStorage.getItem("Token");
+const token = process.env.REACT_APP_SECRET;
 
 const RecordVoiceAndUpload = (
     { isShownRecord,
@@ -26,7 +26,10 @@ const RecordVoiceAndUpload = (
     const [recordingStatus, setRecordingStatus] = useState("inactive");
     const [stream, setStream] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
-    const [dataFromApi, setDataFromApi] = useState(null);
+
+    const [dataFromApi, setDataFromApi] = useState([
+        { start: "0:00:00", end: "0:00:00", text: "" },
+    ]);
 
     //GETTING RECORDING PERMISSION FOR DOMAIN IN BROWSER
     const getMicrophonePermission = async () => {
@@ -77,7 +80,9 @@ const RecordVoiceAndUpload = (
 
             setAudioChunks([]);
 
-            setFileAudio(true);
+            postAudio(audioBlob)
+
+            //setFileAudio(true);
 
             // FOR DURATION OF RECORDED VOICE
             const fileReader = new FileReader();
@@ -95,33 +100,29 @@ const RecordVoiceAndUpload = (
         };
     };
 
-    
-    useEffect(() => {
-        if (audio) {
-            postAudio(audio);
-        }
-    }, [fileAudio, audio]);
 
-    const postAudio = async (audio) => {
-        const formData = new FormData();
-        formData.append("media", audio);
-        formData.append("language", "fa");
-    
+    const postAudio = async (file) => {
         try {
-          const res = await axios.post(url, formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-                Authorization: `Token ${token}`,
-              },
-            }
-          );
-            
-          console.log(res.data);
-          setDataFromApi(res.data[0].segments);
-        } catch (error) {
-          console.error("Error uploading audio:", error);
+            //setStartFetch(true);
+
+            const formData = new FormData();
+            formData.append("language", "fa");
+            formData.append("media", file, `recordType-record_name.mp3`);
+
+            const res = await axios.post(url, formData, {
+                headers: {
+                    Authorization: `Token ${token}`,
+                    "Content-Type": `multipart/form-data`,
+                },
+            });
+            console.log(res.data[0].segments[0]);
+            setDataFromApi(res.data[0].segments);
+
+            setFileAudio(true);
+        } catch (err) {
+            console.log(err);
         }
-      };
+    };
 
 
     return (

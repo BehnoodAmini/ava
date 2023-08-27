@@ -130,19 +130,18 @@
 
 .center-uploaded .center-box {
     height: 18rem;
-    width: 90%;
+    direction: rtl;
 }
 
-.center-box .text-box {
-    justify-content: center;
-    display: inline-flex;
+.center-uploaded .text-box{
+    text-align: start;
+    margin-right: 2rem;
 }
 
 .center-box .data-row {
     display: inline-flex;
-    width: 100%;
+    width: 95%;
     height: 22.5%;
-    margin-right: 5%;
     border-radius: 25px;
     align-content: space-around;
     flex-wrap: wrap;

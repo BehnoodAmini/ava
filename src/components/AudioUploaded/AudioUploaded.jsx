@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./AudioUploaded.css"
 
 import VoiceBar from "../voiceBar/VoiceBar";
-import { testList } from "./testData";
 
 import SimpleBarReact from "simplebar-react";
 import "../../../node_modules/simplebar-react/dist/simplebar.min.css";
@@ -22,6 +21,8 @@ const AudioUploaded = (props) => {
     const [simpleIsShown, setSimpleIsShown] = useState(true);
     const [timeIsShown, setTimeIsShown] = useState(false);
 
+    const [dataText, setDataText] = useState(props.dataFromApi);
+
     const handleClickSimple = event => {
         setSimpleIsShown(true);
         setTimeIsShown(false);
@@ -36,11 +37,26 @@ const AudioUploaded = (props) => {
         props.setFileAudio(false);
     }
 
-    function formatDuration(value) {
+    const formatDuration = (value) => {
+        const timeIndex = value.split(":");
+        const hours = parseInt(timeIndex[0]);
+        const minutes = parseInt(timeIndex[1]);
+        const seconds = parseInt(timeIndex[2]);
+
+        if (hours === 0) {
+            let time = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+            return time;
+        } else {
+            let time = `${hours}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+            return time;
+        }
+    };
+
+    /*function formatDuration(value) {
         const minute = Math.floor(value / 60);
         const secondLeft = value - minute * 60;
         return `${minute < 10 ? `0${minute}` : minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
-    }
+    }*/
 
     // FOR BORDER OF RECORD, UPLOAD AND LINK
     const styles = props.isShownRecord ? {
@@ -50,6 +66,10 @@ const AudioUploaded = (props) => {
         border: `1px solid ${props.color}`,
         borderRadius: '25px',
     } : null;
+
+    useEffect(() => {
+        setDataText(props.dataFromApi);
+    }, [props.dataFromApi]);
 
     return (
         <div
@@ -150,17 +170,23 @@ const AudioUploaded = (props) => {
             <SimpleBarReact style={{ maxHeight: 300, direction: 'rtl', scrollbarMinSize: 1 }} data-simplebar-direction='rtl' >
                 <div className="center-box">
                     {simpleIsShown
-                        ? (<div className="text-box">{props.dataFromApi}</div>)
+                        ? (<div className="text-box">
+                            {dataText.map((data, key) => (
+                                <span key={key}>
+                                    {data.text}{" "}
+                                </span>
+                            ))}
+                        </div>)
                         : (
-                            testList.map((data, key) => {
+                            dataText.map((data, key) => {
                                 return (
                                     <div
                                         className="data-row"
                                         key={key}
                                         style={key % 2 === 0 ? { backgroundColor: "rgb(242, 242, 242)" } : { backgroundColor: "#ffffff" }}
                                     >
-                                        <div className="end-time">{formatDuration(data.endTime)}</div>
-                                        <div className="start-time">{formatDuration(data.startTime)}</div>
+                                        <div className="end-time">{formatDuration(data.end)}</div>
+                                        <div className="start-time">{formatDuration(data.start)}</div>
                                         <div className="data-text">{data.text}</div>
                                     </div>
                                 );
