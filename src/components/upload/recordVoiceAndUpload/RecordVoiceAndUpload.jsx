@@ -103,11 +103,9 @@ const RecordVoiceAndUpload = (
 
     const postAudio = async (file) => {
         try {
-            //setStartFetch(true);
-
             const formData = new FormData();
             formData.append("language", "fa");
-            formData.append("media", file, `recordType-record_name.mp3`);
+            formData.append("media", file, `record_name.mp3`);
 
             const res = await axios.post(url, formData, {
                 headers: {

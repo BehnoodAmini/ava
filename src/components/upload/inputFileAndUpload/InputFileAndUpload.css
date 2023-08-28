@@ -1,0 +1,27 @@
+.center-upload {
+    width: 653px;
+    height: 429px;
+    border: 1px solid #118AD3;
+    border-radius: 25px;
+    padding-top: 25%;
+}
+
+.center-upload .center-upload-icon {
+    height: 62px;
+    width: 62px;
+    border-radius: 50px;
+    border-color: transparent;
+    background-color: #118AD3;
+    cursor: pointer;
+    padding-top: 0.6rem;
+}
+
+.center-upload .center-uploadIcon {
+    height: 40px;
+    width: 29px;
+}
+
+.center-upload .center-upload-text {
+    color: #626262;
+    margin-top: 1rem;
+}

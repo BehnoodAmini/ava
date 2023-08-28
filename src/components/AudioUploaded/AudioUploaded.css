@@ -136,11 +136,13 @@
 .center-uploaded .text-box{
     text-align: start;
     margin-right: 2rem;
+    margin-left: 2rem;
 }
 
 .center-box .data-row {
     display: inline-flex;
-    width: 95%;
+    width: 90%;
+    margin-left: 1rem;
     height: 22.5%;
     border-radius: 25px;
     align-content: space-around;

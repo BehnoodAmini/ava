@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useRef } from "react";
 
-import AudioUploaded from "../AudioUploaded/AudioUploaded";
-import RecordVoice from "./recordVoiceAndUpload/RecordVoiceAndUpload";
+import RecordVoiceAndUpload from "./recordVoiceAndUpload/RecordVoiceAndUpload";
+import InputFileAndUpload from "./inputFileAndUpload/InputFileAndUpload";
 import LanguageDropdown from "../dropdowns/LanguageDropdown";
 import "./Upload.css";
 
@@ -19,7 +19,7 @@ const Upload = (props) => {
     const [isShownUpload, setIsShownUpload] = useState(false);
     const [isShownLink, setIsShownLink] = useState(false);
     const [fileAudio, setFileAudio] = useState(false);
-    
+
     // STATES FOR AUDIO
     const [audio, setAudio] = useState(null);
     const [duration, setDuration] = useState(0);
@@ -54,16 +54,14 @@ const Upload = (props) => {
     };
 
     //  FOR USING A BUTTON AS AN FILE INPUT
-    const hiddenFileInput = React.useRef(null);
+    /*const hiddenFileInput = React.useRef(null);
     const handleClick = event => {
         hiddenFileInput.current.click();
     };
     const handleChangeUpload = event => {
         const fileUploaded = event.target.files[0];
         setFileAudio(fileUploaded);
-        //props.handleFile(fileUploaded);
-        //setIsUploaded(true);
-    };
+    };*/
 
     return (
         <div className="box">
@@ -114,46 +112,30 @@ const Upload = (props) => {
                 </div>
 
                 {isShownRecord && (
-                    <RecordVoice
+                    <RecordVoiceAndUpload
                         isShownRecord={isShownRecord}
                         fileAudio={fileAudio}
                         setFileAudio={setFileAudio}
-                        audio={audio} 
+                        audio={audio}
                         setAudio={setAudio}
                         duration={duration}
                         setDuration={setDuration}
                         audioRef={audioRef}
-                        />
+                    />
                 )}
 
                 {isShownUpload && (
-                    fileAudio
-                        ? <div><AudioUploaded
-                            color="#118AD3"
-                            isShownUpload={isShownUpload}
-                            setFileAudio={setFileAudio}
-                        /></div>
-                        : (
-                            <div className="center-upload">
-                                <button className="center-upload-icon" onClick={handleClick}>
-                                    <img
-                                        className="center-uploadIcon"
-                                        src={uploadIconWhite}
-                                        alt="uploadIcon"
-                                    />
-                                </button>
-                                <input type="file"
-                                    ref={hiddenFileInput}
-                                    onChange={event => handleChangeUpload(event)}
-                                    //onChange={handleChangeUpload}
-                                    style={{ display: 'none' }}
-                                />
-                                <div className="center-upload-text">
-                                    برای بارگذاری فایل گفتاری (صوتی/تصویری)، دکمه را فشار دهید <br />
-                                    متن پیاده شده آن، در اینجا ظاهر شود
-                                </div>
-                            </div>
-                        ))}
+                    <InputFileAndUpload
+                        isShownRecord={isShownRecord}
+                        fileAudio={fileAudio}
+                        setFileAudio={setFileAudio}
+                        audio={audio}
+                        setAudio={setAudio}
+                        duration={duration}
+                        setDuration={setDuration}
+                        audioRef={audioRef}
+                    />
+                )}
 
                 {isShownLink &&
                     <div className="center-link">

@@ -96,33 +96,6 @@
     margin-right: 20px;
 }
 
-.box .center-upload {
-    width: 653px;
-    height: 429px;
-    border: 1px solid #118AD3;
-    border-radius: 25px;
-    padding-top: 25%;
-}
-
-.center-upload .center-upload-icon {
-    height: 62px;
-    width: 62px;
-    border-color: transparent;
-    border-radius: 31px;
-    box-shadow: 0px 4px 4px #00000040;
-    background-color: #118AD3;
-    padding-top: 2%;
-}
-
-.center-upload .center-uploadIcon {
-    height: 40px;
-    width: 29px;
-}
-
-.center-upload .center-upload-text {
-    color: #626262;
-}
-
 .box .center-link {
     width: 653px;
     height: 429px;
