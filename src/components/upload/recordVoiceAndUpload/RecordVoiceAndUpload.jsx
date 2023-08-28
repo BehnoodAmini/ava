@@ -31,6 +31,17 @@ const RecordVoiceAndUpload = (
         { start: "0:00:00", end: "0:00:00", text: "" },
     ]);
 
+    // FOR CONVERT TIME THAT API GIVES TO SECONDS FOR VOICEBAR SLIDER
+    const convertToSeconds = (value) => {
+        const timeIndex = value.split(":");
+        const hours = parseInt(timeIndex[0]);
+        const minutes = parseInt(timeIndex[1]);
+        const seconds = parseInt(timeIndex[2]);
+        const sumOfSeconds = hours * 3600 + minutes * 60 + seconds;
+
+        return sumOfSeconds;
+    };
+
     //GETTING RECORDING PERMISSION FOR DOMAIN IN BROWSER
     const getMicrophonePermission = async () => {
         if ("MediaRecorder" in window) {
@@ -85,7 +96,7 @@ const RecordVoiceAndUpload = (
             //setFileAudio(true);
 
             // FOR DURATION OF RECORDED VOICE
-            const fileReader = new FileReader();
+            /*const fileReader = new FileReader();
             fileReader.onloadend = () => {
                 const audioContext = new window.AudioContext();
                 const arrayBuffer = fileReader.result;
@@ -96,7 +107,7 @@ const RecordVoiceAndUpload = (
                 });
             };
 
-            fileReader.readAsArrayBuffer(audioBlob);
+            fileReader.readAsArrayBuffer(audioBlob);*/
         };
     };
 
@@ -114,6 +125,9 @@ const RecordVoiceAndUpload = (
                 },
             });
             console.log(res.data[0].segments[0]);
+
+            
+            setDuration(convertToSeconds(res.data[0].duration));
             setDataFromApi(res.data[0].segments);
 
             setFileAudio(true);
