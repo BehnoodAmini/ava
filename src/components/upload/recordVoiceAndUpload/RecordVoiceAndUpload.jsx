@@ -32,15 +32,20 @@ const RecordVoiceAndUpload = (
     ]);
 
     // FOR CONVERT TIME THAT API GIVES TO SECONDS FOR VOICEBAR SLIDER
-    const convertToSeconds = (value) => {
-        const timeIndex = value.split(":");
-        const hours = parseInt(timeIndex[0]);
-        const minutes = parseInt(timeIndex[1]);
-        const seconds = parseInt(timeIndex[2]);
-        const sumOfSeconds = hours * 3600 + minutes * 60 + seconds;
-
-        return sumOfSeconds;
-    };
+    function convertTimeToSeconds(timeString) {
+        // Split the time string into an array of hours, minutes, and seconds.
+        const timeArray = timeString.split(":");
+        // Convert the hours, minutes, and seconds to numbers.
+        const hours = parseInt(timeArray[0]);
+        const minutes = parseInt(timeArray[1]);
+        const seconds = parseInt(timeArray[2]);
+        const hoursInSeconds = hours * 3600;
+        const minutesInSeconds = minutes * 60;
+        const secondsInSeconds = seconds * 1;
+        const totalSeconds = hoursInSeconds + minutesInSeconds + secondsInSeconds;
+        
+        return totalSeconds;
+      }
 
     //GETTING RECORDING PERMISSION FOR DOMAIN IN BROWSER
     const getMicrophonePermission = async () => {
@@ -127,7 +132,7 @@ const RecordVoiceAndUpload = (
             console.log(res.data[0].segments[0]);
 
             
-            setDuration(convertToSeconds(res.data[0].duration));
+            setDuration(convertTimeToSeconds(res.data[0].duration));
             setDataFromApi(res.data[0].segments);
 
             setFileAudio(true);

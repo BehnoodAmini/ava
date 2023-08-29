@@ -1,0 +1,43 @@
+.center-link {
+    width: 653px;
+    height: 429px;
+    border: 1px solid #FF1654;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.center-link .input-box {
+    width: 50%;
+    height: 11%;
+    border: 1px solid #FF1654;
+    border-radius: 50px;
+    justify-content: left;
+    align-items: center;
+    display: flex;
+}
+
+.center-link .link-input {
+    border-color: transparent;
+    width: 10.5rem;
+}
+
+.center-link .center-link-icon {
+    background-color: #ff1654;
+    border-radius: 15px;
+    height: 30px;
+    width: 30px;
+    border-color: transparent;
+    box-shadow: 0px 4px 4px #00000040;
+    display:inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1.5rem;
+}
+
+
+.center-link .center-link-text {
+    color: #626262;
+}

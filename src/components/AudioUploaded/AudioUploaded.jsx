@@ -65,6 +65,9 @@ const AudioUploaded = (props) => {
     } : props.isShownUpload ? {
         border: `1px solid ${props.color}`,
         borderRadius: '25px',
+    } : props.isShownLink ? {
+        border: `1px solid ${props.color}`,
+        borderRadius: '25px',
     } : null;
 
     useEffect(() => {
@@ -167,7 +170,14 @@ const AudioUploaded = (props) => {
             <img className="hr" src={hr} alt="hr" />
 
 
-            <SimpleBarReact style={{ maxHeight: 300, direction: 'rtl', scrollbarMinSize: 1 }} data-simplebar-direction='rtl' >
+            <SimpleBarReact
+                style={{
+                    maxHeight: 300,
+                    direction: 'rtl',
+                    scrollbarMinSize: 1
+                }}
+                data-simplebar-direction='rtl'
+            >
                 <div className="center-box">
                     {simpleIsShown
                         ? (<div className="text-box">
@@ -198,7 +208,7 @@ const AudioUploaded = (props) => {
             </SimpleBarReact>
             <div className="footer">
                 <div className="voice-bar">
-                    <VoiceBar {...props}/>
+                    <VoiceBar {...props} />
                 </div>
             </div>
         </div >

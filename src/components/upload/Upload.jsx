@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 
 import RecordVoiceAndUpload from "./recordVoiceAndUpload/RecordVoiceAndUpload";
 import InputFileAndUpload from "./inputFileAndUpload/InputFileAndUpload";
+import InputLinkAndUpload from "./inputLinkAndUpload/InputLinkAndUpload";
 import LanguageDropdown from "../dropdowns/LanguageDropdown";
 import "./Upload.css";
 
@@ -52,16 +53,6 @@ const Upload = (props) => {
             setFileAudio(false);
         }
     };
-
-    //  FOR USING A BUTTON AS AN FILE INPUT
-    /*const hiddenFileInput = React.useRef(null);
-    const handleClick = event => {
-        hiddenFileInput.current.click();
-    };
-    const handleChangeUpload = event => {
-        const fileUploaded = event.target.files[0];
-        setFileAudio(fileUploaded);
-    };*/
 
     return (
         <div className="box">
@@ -126,7 +117,7 @@ const Upload = (props) => {
 
                 {isShownUpload && (
                     <InputFileAndUpload
-                        isShownRecord={isShownRecord}
+                        isShownUpload={isShownUpload}
                         fileAudio={fileAudio}
                         setFileAudio={setFileAudio}
                         audio={audio}
@@ -137,24 +128,18 @@ const Upload = (props) => {
                     />
                 )}
 
-                {isShownLink &&
-                    <div className="center-link">
-                        <div className="input-box">
-                            <input className="link-input" placeholder="example.com/sample.mp3"></input>
-                            <button className="center-link-icon">
-                                <img
-                                    className="center-linkIcon"
-                                    src={linkIconWhite}
-                                    alt="linkIcon"
-                                />
-                            </button>
-                        </div>
-                        <div className="center-link-text">
-                            نشان اینترنتی فایل حاوی گفتار (صوتی/تصویری) را وارد<br />
-                            و دکمه را فشار دهید
-                        </div>
-                    </div>
-                }
+                {isShownLink && (
+                    <InputLinkAndUpload
+                        isShownLink={isShownLink}
+                        fileAudio={fileAudio}
+                        setFileAudio={setFileAudio}
+                        audio={audio}
+                        setAudio={setAudio}
+                        duration={duration}
+                        setDuration={setDuration}
+                        audioRef={audioRef}
+                    />
+                )}
             </div>
             <LanguageDropdown fileAudio={fileAudio} />
         </div >
