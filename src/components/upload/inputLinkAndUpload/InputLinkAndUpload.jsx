@@ -1,10 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
+import validator from "validator";
 
 import AudioUploaded from "../../AudioUploaded/AudioUploaded";
 import './InputLinkAndUpload.css';
 
-import linkIconWhite from "../../assets/images/chain-icon-white.svg";
+import linkIconWhite from "../../../assets/images/chain-icon-white.svg";
 
 const url = "https://harf.roshan-ai.ir/api/transcribe_files/";
 const token = process.env.REACT_APP_SECRET;
@@ -20,7 +21,7 @@ const InputLinkAndUpload = (
         audioRef
     }) => {
 
-    const [link, setLink] = useState(null)
+    const [link, setLink] = useState("")
     const [dataFromApi, setDataFromApi] = useState([
         { start: "0:00:00", end: "0:00:00", text: "" },
     ]);
@@ -41,31 +42,48 @@ const InputLinkAndUpload = (
         return totalSeconds;
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // Validate the link.
+        if (!validator.isURL(link)) {
+            alert("Invalid URL.");
+            return;
+        }
+        // Check if the link has a .mp3 or .wav extension.
+        const isValidLink = link.endsWith(".mp3") || link.endsWith(".mp4") || link.endsWith(".mpeg") || link.endsWith(".wav");
+        if (!isValidLink) {
+            alert("Invalid link. Please enter a link to an .mp3, .mp4, .mpeg or .wav file.");
+            return;
+        }
 
+        // FOR SETTING AUDIO TO PLAY
+        setAudio(link);
 
-    const postAudio = async (file) => {
+        // SEND TO API
         try {
-            const formData = new FormData();
-            formData.append("language", "fa");
-            formData.append("media", file, `upload-${file.name}`);
+            const mediaUrls = [link];
+            const language = "fa";
+            const payload = {
+                media_urls: mediaUrls,
+                language: language,
+            };
 
-            const res = await axios.post(url, formData, {
+            const res = await axios.post(url, payload, {
                 headers: {
                     Authorization: `Token ${token}`,
-                    "Content-Type": `multipart/form-data`,
+                    "Content-Type": "application/json",
                 },
             });
             console.log(res.data[0].segments[0]);
 
-            setDuration(convertToSeconds(res.data[0].duration));
+            setDuration(convertTimeToSeconds(res.data[0].duration));
             setDataFromApi(res.data[0].segments);
 
             setFileAudio(true);
         } catch (err) {
             console.log(err);
         }
-    };
-
+    }
 
     return (
         fileAudio

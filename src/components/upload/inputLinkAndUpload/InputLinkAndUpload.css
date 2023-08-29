@@ -14,14 +14,23 @@
     height: 11%;
     border: 1px solid #FF1654;
     border-radius: 50px;
-    justify-content: left;
+    justify-content: space-around;
     align-items: center;
     display: flex;
 }
 
 .center-link .link-input {
     border-color: transparent;
-    width: 10.5rem;
+    width: 15rem;
+    direction: ltr;
+    margin-left: 0.5rem;
+    font-size:medium;
+}
+
+.center-link input[type="text"],
+textarea {
+    border: none;
+    outline: none;
 }
 
 .center-link .center-link-icon {
@@ -31,13 +40,13 @@
     width: 30px;
     border-color: transparent;
     box-shadow: 0px 4px 4px #00000040;
-    display:inline-flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-left: 1.5rem;
 }
 
 
 .center-link .center-link-text {
     color: #626262;
+    margin-top: 1rem;
 }
