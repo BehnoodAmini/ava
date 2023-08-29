@@ -20,6 +20,7 @@ const Upload = (props) => {
     const [isShownUpload, setIsShownUpload] = useState(false);
     const [isShownLink, setIsShownLink] = useState(false);
     const [fileAudio, setFileAudio] = useState(false);
+    const [language, setLanguage] = useState("fa");
 
     // STATES FOR AUDIO
     const [audio, setAudio] = useState(null);
@@ -112,6 +113,7 @@ const Upload = (props) => {
                         duration={duration}
                         setDuration={setDuration}
                         audioRef={audioRef}
+                        language={language}
                     />
                 )}
 
@@ -125,6 +127,7 @@ const Upload = (props) => {
                         duration={duration}
                         setDuration={setDuration}
                         audioRef={audioRef}
+                        language={language}
                     />
                 )}
 
@@ -138,10 +141,14 @@ const Upload = (props) => {
                         duration={duration}
                         setDuration={setDuration}
                         audioRef={audioRef}
+                        language={language}
                     />
                 )}
             </div>
-            <LanguageDropdown fileAudio={fileAudio} />
+            <LanguageDropdown
+                fileAudio={fileAudio}
+                setLanguage={setLanguage}
+            />
         </div >
     );
 };

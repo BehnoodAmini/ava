@@ -18,7 +18,8 @@ const RecordVoiceAndUpload = (
         setAudio,
         duration,
         setDuration,
-        audioRef
+        audioRef,
+        language
     }) => {
 
     const [permission, setPermission] = useState(false);
@@ -120,7 +121,7 @@ const RecordVoiceAndUpload = (
     const postAudio = async (file) => {
         try {
             const formData = new FormData();
-            formData.append("language", "fa");
+            formData.append("language", language);
             formData.append("media", file, `record_name.mp3`);
 
             const res = await axios.post(url, formData, {
@@ -151,6 +152,7 @@ const RecordVoiceAndUpload = (
                 duration={duration}
                 audioRef={audioRef}
                 dataFromApi={dataFromApi}
+                language={language}
                 color="#00BA9F"
             /></div>
             : (

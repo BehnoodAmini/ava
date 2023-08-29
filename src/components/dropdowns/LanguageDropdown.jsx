@@ -7,7 +7,7 @@ import UpDropIcon from "../../assets/images/up-drop-Icon.png";
 import Seprator from "../../assets/images/Seperator.png";
 
 
-const Dropdown = ({ fileAudio }) => {
+const Dropdown = ({ fileAudio, setLanguage }) => {
 
     const [open, setOpen] = useState(false);
     const [isFarsi, setIsFarsi] = useState(true);
@@ -16,10 +16,12 @@ const Dropdown = ({ fileAudio }) => {
     const handleEng = () => {
         setIsEng(true);
         setIsFarsi(false);
+        setLanguage("en");
     }
     const handleFarsi = () => {
         setIsEng(false);
         setIsFarsi(true);
+        setLanguage("fa");
     }
 
     const handleOpen = () => {

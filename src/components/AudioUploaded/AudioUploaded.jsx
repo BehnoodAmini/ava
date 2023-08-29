@@ -180,7 +180,7 @@ const AudioUploaded = (props) => {
             >
                 <div className="center-box">
                     {simpleIsShown
-                        ? (<div className="text-box">
+                        ? (<div className={props.language === "fa" ? "text-box-fa" : "text-box-en"}>
                             {dataText.map((data, key) => (
                                 <span key={key}>
                                     {data.text}{" "}
@@ -197,7 +197,7 @@ const AudioUploaded = (props) => {
                                     >
                                         <div className="end-time">{formatDuration(data.end)}</div>
                                         <div className="start-time">{formatDuration(data.start)}</div>
-                                        <div className="data-text">{data.text}</div>
+                                        <div className={props.language === "fa" ? "data-text-fa" : "data-text-en"}>{data.text}</div>
                                     </div>
                                 );
                             }

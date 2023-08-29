@@ -17,7 +17,8 @@ const InputFileAndUpload = (
         setAudio,
         duration,
         setDuration,
-        audioRef
+        audioRef,
+        language
     }) => {
 
     const [file, setFile] = useState(null)
@@ -66,7 +67,7 @@ const InputFileAndUpload = (
     const postAudio = async (file) => {
         try {
             const formData = new FormData();
-            formData.append("language", "fa");
+            formData.append("language", language);
             formData.append("media", file, `upload-${file.name}`);
 
             const res = await axios.post(url, formData, {
@@ -96,6 +97,7 @@ const InputFileAndUpload = (
                 duration={duration}
                 audioRef={audioRef}
                 dataFromApi={dataFromApi}
+                language={language}
                 color="#118AD3"
             /></div>
             : (

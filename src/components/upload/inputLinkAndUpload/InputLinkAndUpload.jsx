@@ -18,7 +18,8 @@ const InputLinkAndUpload = (
         setAudio,
         duration,
         setDuration,
-        audioRef
+        audioRef,
+        language
     }) => {
 
     const [link, setLink] = useState("")
@@ -62,13 +63,12 @@ const InputLinkAndUpload = (
         // SEND TO API
         try {
             const mediaUrls = [link];
-            const language = "fa";
-            const payload = {
+            const data = {
                 media_urls: mediaUrls,
                 language: language,
             };
 
-            const res = await axios.post(url, payload, {
+            const res = await axios.post(url, data, {
                 headers: {
                     Authorization: `Token ${token}`,
                     "Content-Type": "application/json",
@@ -83,7 +83,7 @@ const InputLinkAndUpload = (
         } catch (err) {
             console.log(err);
         }
-    }
+    };
 
     return (
         fileAudio
@@ -94,6 +94,7 @@ const InputLinkAndUpload = (
                 duration={duration}
                 audioRef={audioRef}
                 dataFromApi={dataFromApi}
+                language={language}
                 color="#FF1654"
             /></div>
             : (

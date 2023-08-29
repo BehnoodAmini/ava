@@ -71,7 +71,7 @@
 .upload-navbar-left {
     display: flex;
     margin-left: 5%;
-    max-height: 34px;   
+    max-height: 34px;
 }
 
 .upload-navbar-left .download {
@@ -133,10 +133,16 @@
     direction: rtl;
 }
 
-.center-uploaded .text-box{
+.center-uploaded .text-box-fa {
     text-align: start;
     margin-right: 2rem;
     margin-left: 2rem;
+}
+
+.center-uploaded .text-box-en {
+    text-align: end;
+    margin-right: 2rem;
+    margin-left: 3rem;
 }
 
 .center-box .data-row {
@@ -160,15 +166,23 @@
     font-family: 'IRANSans';
 }
 
-.data-row .data-text {
+
+.data-row .data-text-fa {
     margin-right: 15%;
+    text-align: start;
 }
 
-.simplebar-scrollbar{
+.data-row .data-text-en {
+    margin-right: 15%;
+    text-align: start;
+    direction: ltr;
+}
+
+.simplebar-scrollbar {
     height: 20% !important;
 }
 
-.simplebar-scrollbar::before{
+.simplebar-scrollbar::before {
     background-color: rgb(149, 149, 149) !important;
 }
 
@@ -178,14 +192,14 @@
     margin-left: 1rem;
 }
 
-.footer{
+.footer {
     height: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.center-uploaded .hr{
+.center-uploaded .hr {
     width: 605px;
     height: 10px;
 }
