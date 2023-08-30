@@ -140,7 +140,8 @@
 }
 
 .center-uploaded .text-box-en {
-    text-align: end;
+    direction: ltr;
+    text-align: start;
     margin-right: 2rem;
     margin-left: 3rem;
 }

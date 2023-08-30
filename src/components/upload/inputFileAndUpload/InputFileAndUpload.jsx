@@ -84,6 +84,7 @@ const InputFileAndUpload = (
             setFileAudio(true);
         } catch (err) {
             console.log(err);
+            alert("خطا در سرور دوباره تلاش کنید!");
         }
     };
 

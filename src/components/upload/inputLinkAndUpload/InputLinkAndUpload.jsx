@@ -47,13 +47,13 @@ const InputLinkAndUpload = (
         e.preventDefault();
         // Validate the link.
         if (!validator.isURL(link)) {
-            alert("Invalid URL.");
+            alert("لینک وارد شده صحیح نیست!");
             return;
         }
         // Check if the link has a .mp3 or .wav extension.
         const isValidLink = link.endsWith(".mp3") || link.endsWith(".mp4") || link.endsWith(".mpeg") || link.endsWith(".wav");
         if (!isValidLink) {
-            alert("Invalid link. Please enter a link to an .mp3, .mp4, .mpeg or .wav file.");
+            alert("لینک وارد شده صحیح نیست! لطفا لینک با پسوندهای .mp3, .mp4, .mpeg یا .wav وارد کنید. ");
             return;
         }
 
@@ -82,6 +82,7 @@ const InputLinkAndUpload = (
             setFileAudio(true);
         } catch (err) {
             console.log(err);
+            alert("خطا در سرور دوباره تلاش کنید!");
         }
     };
 
