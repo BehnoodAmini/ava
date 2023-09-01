@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import ReactPaginate from "react-paginate";
 
-import { data } from '../../assets/dummydata/data';
+//import { data } from '../../assets/dummydata/data';
 import ArchiveFileAudio from "../ArchiveFileAudio/ArchiveFileAudio";
 
 import './ArchiveList.css';
@@ -16,19 +17,18 @@ import RecordIcon from '../../assets/images/green-record-btn.svg';
 import UploadIcon from '../../assets/images/blue-upload-icon.svg';
 import LinkIcon from '../../assets/images/red-link-icon.svg';
 
+const token = process.env.REACT_APP_SECRET;
+
 const ArchiveList = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage] = useState(8);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
   const [showFileAudio, setShowFileAudio] = useState(false);
-
-  const pageCount = Math.ceil(data.length / itemsPerPage);
-
-  const startIndex = currentPage * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentPageItems = data.slice(startIndex, endIndex);
-  const handlePageChange = (selectedPage) => {
-    setCurrentPage(selectedPage.selected);
-  };
+  const [dataFromApi, setDataFromApi] = useState(null);
+  /*const [uploadMethod, setUploadMethod] = useState(null); //sendType
+  const [audio, setAudio] = useState(""); //audioUrl
+  const [audioFormat, setAudioFormat] = useState(null); //audioType
+  const [audioName, setAudioName] = useState(null);
+  const [audioLanguage, setAudioLanguage] = useState(null);*/
 
   function formatDuration(value) {
     const hour = Math.floor(value / 3600);
@@ -37,38 +37,99 @@ const ArchiveList = () => {
     return `${hour > 0 ? `${hour}:` : ``}${minuteLeft > 0 ? `${minuteLeft}:` : ``}${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
   }
 
+  // FOR TOTAL NUMBER OF PAGES
+  const handlePageChange = (selectedPage) => {
+    setCurrentPage(selectedPage.selected + 1);
+  };
+
+  const pageCounter = Math.ceil((dataFromApi ? dataFromApi.count : 0) / itemsPerPage);
+  const firstIndex = currentPage * itemsPerPage;
+  const lastIndex = firstIndex + itemsPerPage;
+  const pageData = dataFromApi
+    ? dataFromApi?.results?.slice(firstIndex, lastIndex)
+    : [];
+ 
+
+  /*useEffect(() => {
+    const url = `https://harf.roshan-ai.ir/api/requests?page=${currentPage}`;
+    
+const token = process.env.REACT_APP_SECRET;
+console.log(token);
+    axios.get(url, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        const updatedResults = res.data.results.map(row => {
+          console.log(row)
+          return {
+            ...row,
+						date: row.date,
+						file_type: row.request_data.media_urls,
+          };
+        });
+        setDataFromApi({ ...res.data, results: updatedResults });
+        console.log(dataFromApi);
+      })
+    
+      .catch(error => {
+				console.error(error);
+			});
+  }, [currentPage, dataFromApi]);*/
+
+  useEffect(() => {
+    
+    const url = `https://harf.roshan-ai.ir/api/requests?page=${currentPage}`;
+    getFromApi( setDataFromApi, url )
+  },[currentPage])
+
+  //FOR GETTING LISTS FROM API
+  const getFromApi = async ( setDataFromApi, url ) => {
+    try {
+      const res = await axios.get(url, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      console.log(res.data);
+      setDataFromApi(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
   return (
     <div className="archive-container">
       <div className="archive-files-container">
-        {currentPageItems.map((data, key) => {
+        {pageData.map((data) => {
           return (
             <div
               className={`${data.id === showFileAudio ? "archive-file-active" : "archive-file-inactive"}`}
-              key={key}
+              key={data.id}
               style={
-                (data.sendType === "record") && (data.id === showFileAudio)
+                (data.request_type === "record") && (data.id === showFileAudio)
                   ? { border: "1px solid #00ba9f" }
-                  : (data.sendType === "link") && (data.id === showFileAudio)
+                  : (data.request_type === "link") && (data.id === showFileAudio)
                     ? { border: "1px solid #ff1654" }
-                    : (data.sendType === "upload") && (data.id === showFileAudio)
+                    : (data.request_type === "upload") && (data.id === showFileAudio)
                       ? { border: "1px solid #118ad3" }
                       : {}
               }
             >
               <div className="archive-file-up">
                 <img
-                  className="sendtype-icon"
-                  src={data.sendType === "record"
+                  className="request_type-icon"
+                  src={data.request_type === "record"
                     ? RecordIcon
-                    : data.sendType === "upload"
+                    : data.request_type === "upload"
                       ? UploadIcon
-                      : data.sendType === "link"
+                      : data.request_type === "link"
                         ? LinkIcon
                         : ""}
                   alt="icons"
                 />
                 <button
-                  className={`archive-file-name ${data.sendType === "link" && "link-name"}`}
+                  className={`archive-file-name ${data.request_type === "link" && "link-name"}`}
                   onClick={e => showFileAudio === data.id ? setShowFileAudio() : setShowFileAudio(data.id)}
                 >
                   {data.name}
@@ -113,11 +174,11 @@ const ArchiveList = () => {
               </div>
               {data.id === showFileAudio &&
                 <ArchiveFileAudio
-                  color={data.sendType === "record"
+                  color={data.request_type === "record"
                     ? "rgb(0, 186, 159)"
-                    : data.sendType === "upload"
+                    : data.request_type === "upload"
                       ? "rgb(17, 138, 211)"
-                      : data.sendType === "link"
+                      : data.request_type === "link"
                         ? "rgb(255, 22, 84)"
                         : ""} />}
             </div>
@@ -133,7 +194,7 @@ const ArchiveList = () => {
           nextLabel={<LeftArrowIcon />}
           breakLabel={"..."}
           breakClassName={"break-me"}
-          pageCount={pageCount}
+          pageCount={pageCounter}
           marginPagesDisplayed={1}
           pageRangeDisplayed={3}
           onPageChange={handlePageChange}
