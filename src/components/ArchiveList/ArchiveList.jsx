@@ -70,6 +70,7 @@ console.log(token);
       setDataFromApi(res.data);
     } catch (err) {
       console.log(err);
+      alert("خطا در سرور دوباره تلاش کنید!");
     }
   };
 

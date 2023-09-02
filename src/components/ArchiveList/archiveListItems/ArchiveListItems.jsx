@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import moment from 'moment-jalaali';
 
 import ArchiveFileAudio from "../../ArchiveFileAudio/ArchiveFileAudio";
@@ -13,13 +14,19 @@ import { ReactComponent as RecordIcon } from '../../../assets/images/green-recor
 import { ReactComponent as UploadIcon } from '../../../assets/images/blue-upload-icon.svg';
 import { ReactComponent as LinkIcon } from '../../../assets/images/red-link-icon.svg';
 
-const ArchiveListItems = ({ data, dataFromApi }) => {
+const token = process.env.REACT_APP_SECRET;
+
+const ArchiveListItems = ({ data }) => {
+    const audioRef = useRef(null)
     const [showFileAudio, setShowFileAudio] = useState(false);
     const [uploadMethod, setUploadMethod] = useState(null); //sendtype 
     const [audio, setAudio] = useState(""); //audioUrl
     const [audioFormat, setAudioFormat] = useState(null); //audioType
     const [audioName, setAudioName] = useState(null);
     const [audioLanguage, setAudioLanguage] = useState(null);
+    const [textDataFromApi, setTextDataFromApi] = useState([
+        { start: "0:00:00", end: "0:00:00", text: "" },
+    ]);
 
     // FOR CONVERTING AD DATE TO SOLAR DATE(PERSIAN CALENDAR)
     const convertADDateToSolarDate = (date) => {
@@ -27,15 +34,38 @@ const ArchiveListItems = ({ data, dataFromApi }) => {
         return persianDate;
     }
 
-    const formatDuration = (duration) => {
-        const [hours, minutes, seconds] = duration.split(':');
-        if (hours === '00')
-            return `${minutes}:${seconds}`;
-        return duration;
+    const formatDuration = (value) => {
+        const timeIndex = value.split(":");
+        const hours = parseInt(timeIndex[0]);
+        const minutes = parseInt(timeIndex[1]);
+        const seconds = parseInt(timeIndex[2]);
+
+        if (hours === 0) {
+            let time = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+            return time;
+        } else {
+            let time = `${hours}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+            return time;
+        }
     };
 
-    useEffect(() => {
+    // FOR CONVERT TIME THAT API GIVES TO SECONDS FOR VOICEBAR SLIDER
+    function convertTimeToSeconds(timeString) {
+        // Split the time string into an array of hours, minutes, and seconds.
+        const timeArray = timeString.split(":");
+        // Convert the hours, minutes, and seconds to numbers.
+        const hours = parseInt(timeArray[0]);
+        const minutes = parseInt(timeArray[1]);
+        const seconds = parseInt(timeArray[2]);
+        const hoursInSeconds = hours * 3600;
+        const minutesInSeconds = minutes * 60;
+        const secondsInSeconds = seconds * 1;
+        const totalSeconds = hoursInSeconds + minutesInSeconds + secondsInSeconds;
+        
+        return totalSeconds;
+      }
 
+    useEffect(() => {
         // FOR RECORDS AND FILES
         if (data.request_data.media_url) {
             // SET AUDIO FOR PLAYING
@@ -73,6 +103,34 @@ const ArchiveListItems = ({ data, dataFromApi }) => {
         setAudioLanguage(data.request_data.language);
     }, [data]);
 
+
+    useEffect(() => {
+        const url = `https://harf.roshan-ai.ir/api/get_request/${data.id}`;
+
+        if (showFileAudio === data.id)
+            getFromApi(url);
+
+        if (!showFileAudio) {
+            audioRef.current?.pause();
+        }
+    }, [data.id, showFileAudio]);
+
+    const getFromApi = async (url) => {
+        try {
+            const res = await axios.get(url, {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            });
+
+            console.log(res.data);
+            setTextDataFromApi(res.data.response_data[0].segments);
+        } catch (err) {
+            console.log(err);
+            alert("خطا در سرور دوباره تلاش کنید!");
+        }
+    };
+
     return (
         <div
             className={`${data.id === showFileAudio ? "archive-file-active" : "archive-file-inactive"}`}
@@ -100,7 +158,7 @@ const ArchiveListItems = ({ data, dataFromApi }) => {
 
                 <button
                     className={`archive-file-name ${uploadMethod === "link" && "link-name"}`}
-                    onClick={e => showFileAudio === data.id ? setShowFileAudio() : setShowFileAudio(data.id)}
+                    onClick={e => showFileAudio === data.id ? setShowFileAudio(null) : setShowFileAudio(data.id)}
                 >
                     {audioName}
                 </button>
@@ -124,6 +182,11 @@ const ArchiveListItems = ({ data, dataFromApi }) => {
             </div>
             {data.id === showFileAudio &&
                 <ArchiveFileAudio
+                    audio={audio}
+                    audioRef={audioRef}
+                    textDataFromApi={textDataFromApi}
+                    language={audioLanguage}
+                    duration={convertTimeToSeconds(data.duration)}
                     color={uploadMethod === "record"
                         ? "rgb(0, 186, 159)"
                         : uploadMethod === "upload"
