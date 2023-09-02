@@ -149,11 +149,12 @@
 .center-box .data-row {
     display: inline-flex;
     width: 90%;
-    margin-left: 1rem;
-    height: 22.5%;
+    margin-left: 2%;
+    min-height: 3.5rem;
+    height: auto;
     border-radius: 25px;
-    align-content: space-around;
-    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     opacity: 80%;
 }
 
@@ -170,13 +171,17 @@
 
 .data-row .data-text-fa {
     margin-right: 15%;
+    margin-left: 2rem;
     text-align: start;
+    width: 64%;
 }
 
 .data-row .data-text-en {
     margin-right: 15%;
+    margin-left: 2rem;
     text-align: start;
-    direction: ltr;
+    direction: ltr;    
+    width: 64%;
 }
 
 .simplebar-scrollbar {
