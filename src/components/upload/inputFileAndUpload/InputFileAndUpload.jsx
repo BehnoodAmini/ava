@@ -68,7 +68,7 @@ const InputFileAndUpload = (
         try {
             const formData = new FormData();
             formData.append("language", language);
-            formData.append("media", file, `upload-${file.name}`);
+            formData.append("media", file, `upload_${file.name}`);
 
             const res = await axios.post(url, formData, {
                 headers: {

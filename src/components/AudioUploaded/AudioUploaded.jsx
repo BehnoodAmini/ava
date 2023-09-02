@@ -52,12 +52,6 @@ const AudioUploaded = (props) => {
         }
     };
 
-    /*function formatDuration(value) {
-        const minute = Math.floor(value / 60);
-        const secondLeft = value - minute * 60;
-        return `${minute < 10 ? `0${minute}` : minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
-    }*/
-
     // FOR BORDER OF RECORD, UPLOAD AND LINK
     const styles = props.isShownRecord ? {
         border: `1px solid ${props.color}`,
