@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import moment from 'moment-jalaali';
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
 
 import ArchiveFileAudio from "../../ArchiveFileAudio/ArchiveFileAudio";
 
@@ -15,8 +17,9 @@ import { ReactComponent as UploadIcon } from '../../../assets/images/blue-upload
 import { ReactComponent as LinkIcon } from '../../../assets/images/red-link-icon.svg';
 
 const token = process.env.REACT_APP_SECRET;
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-const ArchiveListItems = ({ data }) => {
+const ArchiveListItems = ({ data, dataFromApi, setDataFromApi }) => {
     const audioRef = useRef(null)
     const [showFileAudio, setShowFileAudio] = useState(false);
     const [uploadMethod, setUploadMethod] = useState(null); //sendtype 
@@ -61,9 +64,9 @@ const ArchiveListItems = ({ data }) => {
         const minutesInSeconds = minutes * 60;
         const secondsInSeconds = seconds * 1;
         const totalSeconds = hoursInSeconds + minutesInSeconds + secondsInSeconds;
-        
+
         return totalSeconds;
-      }
+    }
 
     useEffect(() => {
         // FOR RECORDS AND FILES
@@ -103,13 +106,14 @@ const ArchiveListItems = ({ data }) => {
         setAudioLanguage(data.request_data.language);
     }, [data]);
 
-
+    // FOR GETTING DATA OF EACH FILE FROM API
     useEffect(() => {
         const url = `https://harf.roshan-ai.ir/api/get_request/${data.id}`;
 
         if (showFileAudio === data.id)
             getFromApi(url);
 
+        // STOP AUDIO AFTER CLOSING
         if (!showFileAudio) {
             audioRef.current?.pause();
         }
@@ -129,6 +133,70 @@ const ArchiveListItems = ({ data }) => {
             console.log(err);
             alert("خطا در سرور دوباره تلاش کنید!");
         }
+    };
+
+    const handleDel = async (dataId) => {
+        const url = `https://harf.roshan-ai.ir/api/get_request/${dataId}`;
+        try {
+            await axios.delete(url, {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            });
+
+            delFromState();
+        } catch (err) {
+            console.log(err);
+            alert("خطا در سرور دوباره تلاش کنید!");
+        }
+    };
+
+    // FOR DELETING SELECTED FILE LOCALLY FROM STATE
+    const delFromState = () => {
+        const filesUpdate = {
+            ...dataFromApi,
+            results: dataFromApi.results.filter((selectedItem) => selectedItem.id !== data.id),
+        };
+        setDataFromApi(filesUpdate);
+        // PAUSE AUDIO AFTER DELETING FILE
+        audioRef.current.pause();
+    }
+
+    // ONLY WORK FOR ENGLISH!!!!
+    const generatePDF = () => {
+        if (showFileAudio === data.id) {
+            let oneStringTextData = "";
+            textDataFromApi.map((text) => {
+                return oneStringTextData += `${text.text} `;
+            });
+            const docDefinition = {
+                content: oneStringTextData
+            };
+            const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+            pdfDocGenerator.download(audioName);
+        }
+        if (showFileAudio !== data.id)
+            alert("متن مورد نظر دانلود نشد! لطفا فایل را باز کنید و دوباره تلاش کنید!");
+    };
+
+    // FOR COPY BUTTON
+    const handleCopy = () => {
+        if (showFileAudio === data.id) {
+            let oneStringTextData = "";
+            textDataFromApi.map((text) => {
+                return oneStringTextData += `${text.text}${"\n"}`;
+            });
+            navigator.clipboard.writeText(oneStringTextData)
+                .then(() => {
+                    alert("متن مورد نظر کپی شد!");
+                })
+                .catch((error) => {
+                    alert("متن مورد نظر کپی نشد! لطفا دوباره تلاش کنید!");
+                    console.error("Failed to copy text:", error);
+                });
+        }
+        if (showFileAudio !== data.id)
+            alert("متن مورد نظر کپی نشد! لطفا فایل را باز کنید و دوباره تلاش کنید!");
     };
 
     return (
@@ -172,10 +240,27 @@ const ArchiveListItems = ({ data }) => {
                     {formatDuration(data.duration)}
                 </span>
                 <div className="archive-icons">
-                    <DownloadIcon className="archive-download-icon" />
-                    <WordIcon className="archive-word-icon" />
-                    <CopyIcon className="archive-copy-icon" />
-                    <button className="archive-del-btn">
+                    {/* BUTTON FOR DOWNLOADING */}
+                    <a href={audio} download={audioRef}>
+                        <DownloadIcon className="archive-download-icon" />
+                    </a>
+                    {/* BUTTON FOR GENERATE AND DOWNLOAD PDF */}
+                    <WordIcon
+                        className="archive-word-icon"
+                        onClick={generatePDF}
+                    />
+                    {/* BUTYON FOR COPY TEXT OF FILES */}
+                    <CopyIcon
+                        className="archive-copy-icon"
+                        onClick={handleCopy}
+                    />
+                    {/* BUTYON FOR DELETING FILES */}
+                    <button
+                        className="archive-del-btn"
+                        onClick={() => {
+                            return handleDel(data.id);
+                        }}
+                    >
                         <DelIcon className="archive-del-icon" />
                     </button>
                 </div>

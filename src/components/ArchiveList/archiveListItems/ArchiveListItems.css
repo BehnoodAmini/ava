@@ -90,6 +90,7 @@
 .archive-icons {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     flex: 1.8;
 }
 
@@ -126,11 +127,14 @@
 }
 
 .archive-del-btn {
-    height: 25px;
-    width: 25px;
+    height: 30px;
+    width: 30px;
     background-color: transparent;
     border-color: transparent;
     border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 
     &:hover {
         background-color: rgb(220, 53, 69);

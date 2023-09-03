@@ -1,6 +1,8 @@
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import { CircularProgress } from '@mui/material';
+
 import './App.css';
 
 const MainPage = lazy(() => import('./components/MainPage/MainPage'));
@@ -13,7 +15,7 @@ function App() {
           <Route
             path='/'
             element={
-              <Suspense >
+              <Suspense fallback={<CircularProgress color='success' />} >
                 <MainPage />
               </Suspense>
             }
@@ -22,7 +24,7 @@ function App() {
           <Route
             path='/archive'
             element={
-              <Suspense>
+              <Suspense fallback={<CircularProgress color='success' />} >
                 <SecondaryPage />
               </Suspense>
             }

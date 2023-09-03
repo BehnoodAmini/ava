@@ -84,6 +84,7 @@ console.log(token);
               key={data.id}
               data={data}
               dataFromApi={dataFromApi}
+              setDataFromApi={setDataFromApi}
             />
           );
         })}
