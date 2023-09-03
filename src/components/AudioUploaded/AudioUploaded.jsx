@@ -103,7 +103,11 @@ const AudioUploaded = (props) => {
                                         src={simpleTextIconBlack}
                                         alt="simple-text-icon"
                                     />
-                                    <div className="simple-text" style={{ fontWeight: "bold" }}>متن ساده</div>
+                                    <div
+                                        className="simple-text"
+                                        style={{ fontWeight: "bold" }}>
+                                        متن ساده
+                                    </div>
                                 </>
                             )
                             : (
@@ -113,7 +117,11 @@ const AudioUploaded = (props) => {
                                         src={simpleTextIconGray}
                                         alt="simple-text-icon"
                                     />
-                                    <div className="simple-text" style={{ fontWeight: "lighter" }}>متن ساده</div>
+                                    <div
+                                        className="simple-text"
+                                        style={{ fontWeight: "lighter" }}>
+                                        متن ساده
+                                    </div>
                                 </>
                             )
                         }
@@ -131,7 +139,11 @@ const AudioUploaded = (props) => {
                                         src={timedTextIconBlack}
                                         alt="timed-text-icon"
                                     />
-                                    <div className="timed-text" style={{ fontWeight: "bold" }}>متن زمان بندی شده</div>
+                                    <div
+                                        className="timed-text"
+                                        style={{ fontWeight: "bold" }}>
+                                        متن زمان بندی شده
+                                    </div>
                                 </>
                             )
                             : (
@@ -141,14 +153,22 @@ const AudioUploaded = (props) => {
                                         src={timedTextIconGray}
                                         alt="timed-text-icon"
                                     />
-                                    <div className="timed-text" style={{ fontWeight: "lighter" }}>متن زمان بندی شده</div>
+                                    <div
+                                        className="timed-text"
+                                        style={{ fontWeight: "lighter" }}
+                                    >
+                                        متن زمان بندی شده
+                                    </div>
                                 </>
                             )
                         }
                     </button>
                 </div>
                 <div className="upload-navbar-left">
-                    <a href={props.audio} download={props.audioRef}>
+                    <a
+                        href={props.audio}
+                        download={props.audioRef}
+                    >
                         <button className="download" >
                             <img
                                 className="download-icon"
