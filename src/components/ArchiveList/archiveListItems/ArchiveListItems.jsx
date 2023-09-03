@@ -147,7 +147,6 @@ const ArchiveListItems = ({ data, dataFromApi, setDataFromApi }) => {
             delFromState();
         } catch (err) {
             console.log(err);
-            alert("خطا در سرور دوباره تلاش کنید!");
         }
     };
 

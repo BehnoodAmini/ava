@@ -68,6 +68,21 @@ const AudioUploaded = (props) => {
         setDataText(props.dataFromApi);
     }, [props.dataFromApi]);
 
+    const handleCopy = () => {
+        let oneStringTextData = "";
+        dataText.map((text) => {
+            return oneStringTextData += `${text.text}${"\n"}`;
+        });
+        navigator.clipboard.writeText(oneStringTextData)
+            .then(() => {
+                alert("متن مورد نظر کپی شد!");
+            })
+            .catch((error) => {
+                alert("متن مورد نظر کپی نشد! لطفا دوباره تلاش کنید!");
+                console.error("Failed to copy text:", error);
+            });
+    };
+
     return (
         <div
             className="center-uploaded"
@@ -133,14 +148,19 @@ const AudioUploaded = (props) => {
                     </button>
                 </div>
                 <div className="upload-navbar-left">
-                    <button className="download">
-                        <img
-                            className="download-icon"
-                            src={downloadIcon}
-                            alt="download-icon"
-                        />
-                    </button>
-                    <button className="copy">
+                    <a href={props.audio} download={props.audioRef}>
+                        <button className="download" >
+                            <img
+                                className="download-icon"
+                                src={downloadIcon}
+                                alt="download-icon"
+                            />
+                        </button>
+                    </a>
+                    <button
+                        className="copy"
+                        onClick={handleCopy}
+                    >
                         <img
                             className="copy-icon"
                             src={copyIcon}
