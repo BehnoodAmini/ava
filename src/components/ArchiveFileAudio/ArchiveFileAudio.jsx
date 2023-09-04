@@ -44,9 +44,58 @@ const ArchiveFileAudio = (props) => {
         }
     };
 
+    function convertTimeToSeconds(timeString) {
+        // Split the time string into an array of hours, minutes, and seconds.
+        const timeArray = timeString.split(":");
+        // Convert the hours, minutes, and seconds to numbers.
+        const hours = parseInt(timeArray[0]);
+        const minutes = parseInt(timeArray[1]);
+        const seconds = parseInt(timeArray[2]);
+        const hoursInSeconds = hours * 3600;
+        const minutesInSeconds = minutes * 60;
+        const secondsInSeconds = seconds * 1;
+        const totalSeconds = hoursInSeconds + minutesInSeconds + secondsInSeconds;
+
+        return totalSeconds;
+    }
+
     useEffect(() => {
         setDataText(props.textDataFromApi);
     }, [props.textDataFromApi]);
+
+    const scrollIntoView = id => {
+        const element = document.querySelector('#' + id);
+
+        if (element) {
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+            })
+        }
+    }
+
+    // UPDATE TIME TO SCROLL IN TEXT AND COLORIZE TEXT
+    const updateTime = () => {
+        const currentTime = props.audioRef.current.currentTime;
+
+        const updatetext = dataText.map((data) => {
+            const isPlaying = currentTime >= convertTimeToSeconds(data.start) && currentTime <= convertTimeToSeconds(data.end);
+            return { ...data, playing: isPlaying };
+        });
+        setDataText(updatetext);
+    };
+
+    // CALL SCROLLING IN EVERY RENDER
+    useEffect(() => {
+        scrollIntoView("playing");
+        // SETS UP A RECURRING INTERVAL TO CALL THE  UPDATETIME FUNCTION EVERY 100 MILISECONDS
+        const interval = setInterval(updateTime, 100);
+        // CLEARS THE INTERVAL WHEN THE COMPONENT UNMOUNTS OR WHEN THE DEPENDENCIES CHANGE
+        return () => {
+            clearInterval(interval);
+        };
+        // eslint-disable-next-line
+    }, [dataText, props.audioRef]);
 
     return (
         <div className="archive-center-uploaded">
@@ -124,7 +173,11 @@ const ArchiveFileAudio = (props) => {
                     {simpleIsShown
                         ? (<div className={props.language === "fa" ? "text-box-fa" : "text-box-en"}>
                             {dataText.map((data, key) => (
-                                <span key={key}>
+                                <span
+                                    key={key}
+                                    style={data.playing ? { color: props.color } : {}}
+                                    id={data.playing ? "playing" : "paused"}
+                                >
                                     {data.text}{" "}
                                 </span>
                             ))}
@@ -133,9 +186,10 @@ const ArchiveFileAudio = (props) => {
                             dataText.map((data, key) => {
                                 return (
                                     <div
-                                        className="data-row"
+                                        className={key % 2 === 0 ? "data-row1" : "data-row2"}
                                         key={key}
-                                        style={key % 2 === 0 ? { backgroundColor: "rgb(242, 242, 242)" } : { backgroundColor: "#ffffff" }}
+                                        style={data.playing ? { color: props.color } : {}}
+                                        id={data.playing ? "playing" : "paused"}
                                     >
                                         <div className="end-time">{formatDuration(data.end)}</div>
                                         <div className="start-time">{formatDuration(data.start)}</div>

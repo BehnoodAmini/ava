@@ -92,7 +92,7 @@
     margin-right: 2rem;
 }
 
-.archive-center-box .data-row {
+.archive-center-box .data-row1 {
     display: inline-flex;
     width: 100%;
     min-height: 3.5rem;
@@ -102,26 +102,40 @@
     justify-content: center;
     align-items: center;
     opacity: 80%;
+    background-color: rgb(242, 242, 242);
 }
 
-.data-row .end-time {
+.archive-center-box .data-row2 {
+    display: inline-flex;
+    width: 100%;
+    min-height: 3.5rem;
+    height: auto;
+    margin-right: 5%;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+    opacity: 80%;
+    background-color: #ffffff;
+}
+
+.archive-center-box .end-time {
     margin-right: 5%;
     font-family: 'IRANSans';
 }
 
-.data-row .start-time {
+.archive-center-box .start-time {
     margin-right: 5%;
     font-family: 'IRANSans';
 }
 
-.archive-center-box .data-row .data-text-fa {
+.archive-center-box .data-text-fa {
     margin-right: 15%;
     margin-left: 2rem;
     text-align: start;
     width: 64%;
 }
 
-.archive-center-box .data-row .data-text-en {
+.archive-center-box .data-text-en {
     margin-right: 15%;
     margin-left: 2rem;
     text-align: start;

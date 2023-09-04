@@ -44,9 +44,9 @@ const RecordVoiceAndUpload = (
         const minutesInSeconds = minutes * 60;
         const secondsInSeconds = seconds * 1;
         const totalSeconds = hoursInSeconds + minutesInSeconds + secondsInSeconds;
-        
+
         return totalSeconds;
-      }
+    }
 
     //GETTING RECORDING PERMISSION FOR DOMAIN IN BROWSER
     const getMicrophonePermission = async () => {
@@ -132,7 +132,7 @@ const RecordVoiceAndUpload = (
             });
             console.log(res.data[0].segments[0]);
 
-            
+
             setDuration(convertTimeToSeconds(res.data[0].duration));
             setDataFromApi(res.data[0].segments);
 
@@ -159,7 +159,10 @@ const RecordVoiceAndUpload = (
             : (
                 <div className="center-mic">
                     {!permission ? (
-                        <button className="center-mic-icon" onClick={getMicrophonePermission}>
+                        <button
+                            className="center-mic-icon"
+                            onClick={getMicrophonePermission}
+                        >
                             <img
                                 className="center-micIcon"
                                 src={micIconWhite}
@@ -168,7 +171,10 @@ const RecordVoiceAndUpload = (
                         </button>
                     ) : null}
                     {permission && recordingStatus === "inactive" ? (
-                        <button className="center-mic-icon" onClick={startRecording}>
+                        <button
+                            className="center-mic-icon"
+                            onClick={startRecording}
+                        >
                             <img
                                 className="center-micIcon"
                                 src={micIconWhite}
@@ -177,7 +183,10 @@ const RecordVoiceAndUpload = (
                         </button>
                     ) : null}
                     {recordingStatus === "recording" ? (
-                        <button className="center-mic-icon-recording" onClick={stopRecording}>
+                        <button
+                            className="center-mic-icon-recording"
+                            onClick={stopRecording}
+                        >
                             <img
                                 className="center-micIcon"
                                 src={micIconWhite}
