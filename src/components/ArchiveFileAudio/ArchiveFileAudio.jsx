@@ -74,19 +74,18 @@ const ArchiveFileAudio = (props) => {
         }
     }
 
-    // UPDATE TIME TO SCROLL IN TEXT AND COLORIZE TEXT
-    const updateTime = () => {
-        const currentTime = props.audioRef.current.currentTime;
-
-        const updatetext = dataText.map((data) => {
-            const isPlaying = currentTime >= convertTimeToSeconds(data.start) && currentTime <= convertTimeToSeconds(data.end);
-            return { ...data, playing: isPlaying };
-        });
-        setDataText(updatetext);
-    };
-
     // CALL SCROLLING IN EVERY RENDER
     useEffect(() => {
+        // UPDATE TIME TO SCROLL IN TEXT AND COLORIZE TEXT
+        const updateTime = () => {
+            const currentTime = props.audioRef.current.currentTime;
+
+            const updatetext = dataText.map((data) => {
+                const isPlaying = currentTime >= convertTimeToSeconds(data.start) && currentTime <= convertTimeToSeconds(data.end);
+                return { ...data, playing: isPlaying };
+            });
+            setDataText(updatetext);
+        };
         scrollIntoView("playing");
         // SETS UP A RECURRING INTERVAL TO CALL THE  UPDATETIME FUNCTION EVERY 100 MILISECONDS
         const interval = setInterval(updateTime, 100);
@@ -162,7 +161,7 @@ const ArchiveFileAudio = (props) => {
 
             <SimpleBarReact
                 style={{
-                    maxHeight: 150,
+                    maxHeight: 180,
                     direction: 'rtl',
                     scrollbarMinSize: 1,
                     marginTop: -10
