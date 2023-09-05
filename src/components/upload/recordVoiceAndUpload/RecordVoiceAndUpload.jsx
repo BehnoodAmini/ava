@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
 import AudioUploaded from "../../AudioUploaded/AudioUploaded";
@@ -31,6 +31,8 @@ const RecordVoiceAndUpload = (
     const [dataFromApi, setDataFromApi] = useState([
         { start: "0:00:00", end: "0:00:00", text: "" },
     ]);
+    const [segments, setSegments] = useState([]);
+    const ws = useRef();
 
     // FOR CONVERT TIME THAT API GIVES TO SECONDS FOR VOICEBAR SLIDER
     function convertTimeToSeconds(timeString) {
@@ -47,6 +49,37 @@ const RecordVoiceAndUpload = (
 
         return totalSeconds;
     }
+
+    const onSocketOpen = () => {
+        console.log("connected");
+    };
+
+    const onSocketMessage = (event) => {
+        console.log(event.data);
+        const { segment_id, text, start, end } = JSON.parse(event.data);
+		const data = { text: text, start: convertTimeToSeconds(start), end: convertTimeToSeconds(end) };
+		setSegments(prev => {
+			const prevData = [...prev];
+			prevData[segment_id] = data;
+			return prevData;
+		});
+        console.log(`segments: ${segments}`);
+
+    };
+
+    useEffect(() => {
+        ws.current = new WebSocket('wss://harf.roshan-ai.ir/ws_api/transcribe_files/');
+        ws.current.addEventListener('open', onSocketOpen);
+        ws.current.addEventListener('message', onSocketMessage);
+
+        return () => {
+            if (ws.current) {
+                ws.current.close = (event) => {
+                    console.log("The connection has been closed successfully.");
+                };
+            }
+        }
+    }, [ws])
 
     //GETTING RECORDING PERMISSION FOR DOMAIN IN BROWSER
     const getMicrophonePermission = async () => {
@@ -72,7 +105,7 @@ const RecordVoiceAndUpload = (
 
         mediaRecorder.current = media;
 
-        mediaRecorder.current.start();
+        mediaRecorder.current.start(1000);
 
         let localAudioChunks = [];
 
@@ -80,7 +113,10 @@ const RecordVoiceAndUpload = (
             if (typeof event.data === "undefined") return;
             if (event.data.size === 0) return;
             localAudioChunks.push(event.data);
+            ws.current.send(event.data);
         };
+
+
 
         setAudioChunks(localAudioChunks);
     };
@@ -96,6 +132,8 @@ const RecordVoiceAndUpload = (
             setAudio(audioUrl);
 
             setAudioChunks([]);
+
+
 
             postAudio(audioBlob)
 
@@ -198,6 +236,13 @@ const RecordVoiceAndUpload = (
                         برای شروع به صحبت، دکمه را فشار دهید <br />
                         متن پیاده شده آن، در اینجا ظاهر شود
                     </div>
+                    {segments.map((text, k) => (
+                        <div
+                            key={k}
+                        >
+                            <div className="mr-4">{text.text}</div>
+                        </div>
+                    ))}
                 </div>
             )
     );
