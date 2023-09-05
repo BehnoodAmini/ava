@@ -3,6 +3,7 @@ import axios from "axios";
 import moment from 'moment-jalaali';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 import ArchiveFileAudio from "../../ArchiveFileAudio/ArchiveFileAudio";
 
@@ -30,6 +31,7 @@ const ArchiveListItems = ({ data, dataFromApi, setDataFromApi }) => {
     const [textDataFromApi, setTextDataFromApi] = useState([
         { start: "0:00:00", end: "0:00:00", text: "" },
     ]);
+    const [sizeInMegabytes, setSizeInMegabytes] = useState(0);
 
     // FOR CONVERTING AD DATE TO SOLAR DATE(PERSIAN CALENDAR)
     const convertADDateToSolarDate = (date) => {
@@ -73,6 +75,9 @@ const ArchiveListItems = ({ data, dataFromApi, setDataFromApi }) => {
         if (data.request_data.media_url) {
             // SET AUDIO FOR PLAYING
             setAudio(data.request_data.media_url);
+            const sizeInBytes = data.request_data.media_url?.size;
+            const sizeInKilobytes = sizeInBytes / 1024;
+            setSizeInMegabytes(sizeInKilobytes / 1024);
             // FOR GETTING AUDIO FORMAT FOR EXAMPLE: .wav , .mp4 ,...
             setAudioFormat(data.request_data.media_url.split(".").pop());
 
@@ -100,6 +105,9 @@ const ArchiveListItems = ({ data, dataFromApi, setDataFromApi }) => {
             setUploadMethod("link");
 
             setAudio(data.request_data.media_urls[0]);
+            const sizeInBytes = data.request_data.media_urls[0].size;
+            const sizeInKilobytes = sizeInBytes / 1024;
+            setSizeInMegabytes(sizeInKilobytes / 1024);
             setAudioName(data.request_data.media_urls[0]);
         }
 
@@ -240,7 +248,11 @@ const ArchiveListItems = ({ data, dataFromApi, setDataFromApi }) => {
                 </span>
                 <div className="archive-icons">
                     {/* BUTTON FOR DOWNLOADING */}
-                    <a href={audio} download={audioRef}>
+                    <a
+                        href={audio}
+                        download={audioRef}
+                        data-tooltip-id="download-tooltip"
+                    >
                         <DownloadIcon className="archive-download-icon" />
                     </a>
                     {/* BUTTON FOR GENERATE AND DOWNLOAD PDF */}
@@ -280,6 +292,21 @@ const ArchiveListItems = ({ data, dataFromApi, setDataFromApi }) => {
                                 : ""}
                 />
             }
+            <ReactTooltip
+                noArrow
+                id="download-tooltip"
+                place="bottom-end"
+                content={`${sizeInMegabytes} مگابایت`}
+                style={{
+                    backgroundColor: "rgb(255, 255, 255)",
+                    color: "#222",
+                    boxShadow: "1px 1px 1px 1px rgba(0, 0, 0, 0.15)",
+                    width: "94px",
+                    height: "30px",
+                    fontSize: "10px",
+                    font: "SANSSarif"
+                }}
+            />
         </div>
     );
 };
