@@ -3,7 +3,24 @@
     height: 429px;
     border: 1px solid #00BA9F;
     border-radius: 25px 0 25px 25px;
-    padding-top: 25%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.center-mic-recording {
+    width: 653px;
+    height: 429px;
+    border: 1px solid #00BA9F;
+    border-radius: 25px 0 25px 25px;
+    overflow: auto;
+    -ms-overflow-style: none; /* IE 11 */
+    scrollbar-width: none; /* Firefox 64 */
+}
+
+.center-mic-recording::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 .center-mic .center-mic-icon {
@@ -16,14 +33,15 @@
     padding-top: 2%;
 }
 
-.center-mic .center-mic-icon-recording {
-    height: 62px;
-    width: 62px;
+.center-mic-recording .center-mic-icon-recording {
+    height: 60px;
+    width: 60px;
     border-color: transparent;
     border-radius: 31px;
     box-shadow: 0px 4px 4px #00000040;
     background-color: #00BA9F;
     padding-top: 2%;
+    margin-top: 10rem;
     animation-name: pulse;
 	animation-duration: 1.5s;
 	animation-iteration-count: infinite;
@@ -46,7 +64,17 @@
     width: 29px;
 }
 
+.center-mic-recording .center-micIcon {
+    height: 40px;
+    width: 29px;
+}
+
 .center-mic .center-mic-text {
     color: #626262;
     margin-top: 1rem;
+}
+
+.webSocket-text {
+    margin: 0 1rem 0 1rem;
+    text-align: start;
 }

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
 import AudioUploaded from "../../AudioUploaded/AudioUploaded";
+import { convertTimeToSeconds } from "../../../helpers/TimeFunctions";
 import './RecordVoiceAndUpload.css';
 
 import micIconWhite from "../../../assets/images/mic-icon-white.svg";
@@ -31,42 +32,27 @@ const RecordVoiceAndUpload = (
     const [dataFromApi, setDataFromApi] = useState([
         { start: "0:00:00", end: "0:00:00", text: "" },
     ]);
-    const [segments, setSegments] = useState([]);
+    const [dataFromWs, setDataFromWs] = useState([]);
     const ws = useRef();
-
-    // FOR CONVERT TIME THAT API GIVES TO SECONDS FOR VOICEBAR SLIDER
-    function convertTimeToSeconds(timeString) {
-        // Split the time string into an array of hours, minutes, and seconds.
-        const timeArray = timeString.split(":");
-        // Convert the hours, minutes, and seconds to numbers.
-        const hours = parseInt(timeArray[0]);
-        const minutes = parseInt(timeArray[1]);
-        const seconds = parseInt(timeArray[2]);
-        const hoursInSeconds = hours * 3600;
-        const minutesInSeconds = minutes * 60;
-        const secondsInSeconds = seconds * 1;
-        const totalSeconds = hoursInSeconds + minutesInSeconds + secondsInSeconds;
-
-        return totalSeconds;
-    }
 
     const onSocketOpen = () => {
         console.log("connected");
     };
 
+    // CONVERTING JSON MESSAGE FROM WEBSOCKET TO OBJECT
     const onSocketMessage = (event) => {
         console.log(event.data);
-        const { segment_id, text, start, end } = JSON.parse(event.data);
-		const data = { text: text, start: convertTimeToSeconds(start), end: convertTimeToSeconds(end) };
-		setSegments(prev => {
-			const prevData = [...prev];
-			prevData[segment_id] = data;
-			return prevData;
-		});
-        console.log(`segments: ${segments}`);
-
+        const { segment_id, text } = JSON.parse(event.data);
+        const data = { text: text };
+        setDataFromWs(obj => {
+            const lastData = [...obj];
+            lastData[segment_id] = data;
+            return lastData;
+        });
+        console.log(`segments: ${dataFromWs}`);
     };
 
+    // WEBSOCKET
     useEffect(() => {
         ws.current = new WebSocket('wss://harf.roshan-ai.ir/ws_api/transcribe_files/');
         ws.current.addEventListener('open', onSocketOpen);
@@ -79,6 +65,7 @@ const RecordVoiceAndUpload = (
                 };
             }
         }
+        // eslint-disable-next-line
     }, [ws])
 
     //GETTING RECORDING PERMISSION FOR DOMAIN IN BROWSER
@@ -95,7 +82,7 @@ const RecordVoiceAndUpload = (
                 alert(err.message);
             }
         } else {
-            alert("The MediaRecorder API is not supported in your browser.");
+            alert("به میکروفون اجازه دسترسی دهید یا مرورگر خود را بروزرسانی کنید!");
         }
     };
 
@@ -116,8 +103,6 @@ const RecordVoiceAndUpload = (
             ws.current.send(event.data);
         };
 
-
-
         setAudioChunks(localAudioChunks);
     };
 
@@ -128,33 +113,13 @@ const RecordVoiceAndUpload = (
         mediaRecorder.current.onstop = () => {
             const audioBlob = new Blob(audioChunks, { type: mimeType });
             const audioUrl = URL.createObjectURL(audioBlob);
-
+           
             setAudio(audioUrl);
-
             setAudioChunks([]);
 
-
-
             postAudio(audioBlob)
-
-            //setFileAudio(true);
-
-            // FOR DURATION OF RECORDED VOICE
-            /*const fileReader = new FileReader();
-            fileReader.onloadend = () => {
-                const audioContext = new window.AudioContext();
-                const arrayBuffer = fileReader.result;
-
-                audioContext.decodeAudioData(arrayBuffer, (buffer) => {
-                    const durationInSeconds = buffer.duration;
-                    setDuration(durationInSeconds);
-                });
-            };
-
-            fileReader.readAsArrayBuffer(audioBlob);*/
         };
     };
-
 
     const postAudio = async (file) => {
         try {
@@ -170,7 +135,6 @@ const RecordVoiceAndUpload = (
             });
             console.log(res.data[0].segments[0]);
 
-
             setDuration(convertTimeToSeconds(res.data[0].duration));
             setDataFromApi(res.data[0].segments);
 
@@ -180,7 +144,6 @@ const RecordVoiceAndUpload = (
             alert("خطا در سرور دوباره تلاش کنید!");
         }
     };
-
 
     return (
         fileAudio
@@ -195,32 +158,70 @@ const RecordVoiceAndUpload = (
                 color="#00BA9F"
             /></div>
             : (
-                <div className="center-mic">
+                <div className={recordingStatus === "recording" ? "center-mic-recording" : "center-mic"}>
                     {!permission ? (
-                        <button
-                            className="center-mic-icon"
-                            onClick={getMicrophonePermission}
-                        >
-                            <img
-                                className="center-micIcon"
-                                src={micIconWhite}
-                                alt="micIcon"
-                            />
-                        </button>
+                        <>
+                            <button
+                                className="center-mic-icon"
+                                onClick={getMicrophonePermission}
+                            >
+                                <img
+                                    className="center-micIcon"
+                                    src={micIconWhite}
+                                    alt="micIcon"
+                                />
+                            </button>
+                            <div className="center-mic-text">
+                                برای شروع به صحبت، دکمه را فشار دهید <br />
+                                متن پیاده شده آن، در اینجا ظاهر شود
+                            </div>
+                        </>
                     ) : null}
                     {permission && recordingStatus === "inactive" ? (
-                        <button
-                            className="center-mic-icon"
-                            onClick={startRecording}
-                        >
-                            <img
-                                className="center-micIcon"
-                                src={micIconWhite}
-                                alt="micIcon"
-                            />
-                        </button>
+                        <>
+                            <button
+                                className="center-mic-icon"
+                                onClick={startRecording}
+                            >
+                                <img
+                                    className="center-micIcon"
+                                    src={micIconWhite}
+                                    alt="micIcon"
+                                />
+                            </button>
+                            <div className="center-mic-text">
+                                برای شروع به صحبت، دکمه را فشار دهید <br />
+                                متن پیاده شده آن، در اینجا ظاهر شود
+                            </div>
+                        </>
                     ) : null}
-                    {recordingStatus === "recording" ? (
+
+                    {/* USING WEBSOCKET IF LANGUAGE IS FARSI */}
+                    {(recordingStatus === "recording" && language === "fa") ? (
+                        <>
+                            {dataFromWs.map((text, k) => {
+                                return (
+                                    <div key={k}>
+                                        <div className="webSocket-text">{text.text}{" "}</div>
+                                    </div>
+                                )
+                            }
+                            )}
+                            <button
+                                className="center-mic-icon-recording"
+                                onClick={stopRecording}
+                            >
+                                <img
+                                    className="center-micIcon"
+                                    src={micIconWhite}
+                                    alt="micIcon"
+                                />
+                            </button>
+                        </>
+                    ) : null}
+
+                    {/* DO NOT USE WEBSOCKET IF LANGUAGE IS ENGLISH AND JUST POST AUDIO */}
+                    {(recordingStatus === "recording" && language === "en") ? (
                         <button
                             className="center-mic-icon-recording"
                             onClick={stopRecording}
@@ -232,17 +233,6 @@ const RecordVoiceAndUpload = (
                             />
                         </button>
                     ) : null}
-                    <div className="center-mic-text">
-                        برای شروع به صحبت، دکمه را فشار دهید <br />
-                        متن پیاده شده آن، در اینجا ظاهر شود
-                    </div>
-                    {segments.map((text, k) => (
-                        <div
-                            key={k}
-                        >
-                            <div className="mr-4">{text.text}</div>
-                        </div>
-                    ))}
                 </div>
             )
     );
