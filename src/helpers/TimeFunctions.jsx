@@ -14,7 +14,7 @@ export const formatDurationNoZero = (value) => {
         let time = `${hours}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
         return time;
     }
-};
+}; 
 
 // FORMAT DURATION WITH EXTRA ZERO AT LEFT
 export const formatDuration = (value) => {
