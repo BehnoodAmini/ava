@@ -6,13 +6,6 @@
   width: 100%;
 }
 
-/*.box .dropdown-wrapper {
-    border: 0px none;
-    height: 37px;
-    overflow-x: hidden;
-    width: 121px;
-  }*/
-
 .box .dropdown {
   height: 37px;
   position: fixed;

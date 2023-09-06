@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import moment from 'moment-jalaali';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
 import ArchiveFileAudio from "../../ArchiveFileAudio/ArchiveFileAudio";
+import {
+    formatDurationNoZero,
+    convertTimeToSeconds,
+    convertADDateToSolarDate
+} from "../../../helpers/TimeFunctions"
 
 import "./ArchiveListItems.css";
 
@@ -23,9 +27,9 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 const ArchiveListItems = ({ data, dataFromApi, setDataFromApi }) => {
     const audioRef = useRef(null)
     const [showFileAudio, setShowFileAudio] = useState(false);
-    const [uploadMethod, setUploadMethod] = useState(null); //sendtype 
-    const [audio, setAudio] = useState(""); //audioUrl
-    const [audioFormat, setAudioFormat] = useState(null); //audioType
+    const [uploadMethod, setUploadMethod] = useState(null);
+    const [audio, setAudio] = useState("");
+    const [audioFormat, setAudioFormat] = useState(null);
     const [audioName, setAudioName] = useState(null);
     const [audioLanguage, setAudioLanguage] = useState(null);
     const [textDataFromApi, setTextDataFromApi] = useState([
@@ -33,43 +37,7 @@ const ArchiveListItems = ({ data, dataFromApi, setDataFromApi }) => {
     ]);
     const [sizeInMegabytes, setSizeInMegabytes] = useState(0);
 
-    // FOR CONVERTING AD DATE TO SOLAR DATE(PERSIAN CALENDAR)
-    const convertADDateToSolarDate = (date) => {
-        const persianDate = moment(date, 'YYYY-MM-DD HH:mm:ss').format('jYYYY-jMM-jDD');
-        return persianDate;
-    }
-
-    const formatDuration = (value) => {
-        const timeIndex = value.split(":");
-        const hours = parseInt(timeIndex[0]);
-        const minutes = parseInt(timeIndex[1]);
-        const seconds = parseInt(timeIndex[2]);
-
-        if (hours === 0) {
-            let time = `${minutes}:${seconds.toString().padStart(2, "0")}`;
-            return time;
-        } else {
-            let time = `${hours}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-            return time;
-        }
-    };
-
-    // FOR CONVERT TIME THAT API GIVES TO SECONDS FOR VOICEBAR SLIDER
-    function convertTimeToSeconds(timeString) {
-        // Split the time string into an array of hours, minutes, and seconds.
-        const timeArray = timeString.split(":");
-        // Convert the hours, minutes, and seconds to numbers.
-        const hours = parseInt(timeArray[0]);
-        const minutes = parseInt(timeArray[1]);
-        const seconds = parseInt(timeArray[2]);
-        const hoursInSeconds = hours * 3600;
-        const minutesInSeconds = minutes * 60;
-        const secondsInSeconds = seconds * 1;
-        const totalSeconds = hoursInSeconds + minutesInSeconds + secondsInSeconds;
-
-        return totalSeconds;
-    }
-
+    // SETUP FILES TO DISPLAY
     useEffect(() => {
         // FOR RECORDS AND FILES
         if (data.request_data.media_url) {
@@ -244,7 +212,7 @@ const ArchiveListItems = ({ data, dataFromApi, setDataFromApi }) => {
                     {audioFormat}.
                 </span>
                 <span className="archive-file-duration">
-                    {formatDuration(data.duration)}
+                    {formatDurationNoZero(data.duration)}
                 </span>
                 <div className="archive-icons">
                     {/* BUTTON FOR DOWNLOADING */}

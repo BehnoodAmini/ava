@@ -23,35 +23,7 @@ const ArchiveList = () => {
 
   // FOR TOTAL NUMBER OF PAGES
   const pageCounter = Math.ceil((dataFromApi ? dataFromApi.count : 0) / itemsPerPage);
-  const pageData = dataFromApi
-    ? dataFromApi?.results : [];
-
-
-  /*useEffect(() => {
-    const url = `https://harf.roshan-ai.ir/api/requests?page=${currentPage}`;
-    
-const token = process.env.REACT_APP_SECRET;
-console.log(token);
-    axios.get(url, {
-        headers: { Authorization: `Token ${token}` },
-      })
-      .then((res) => {
-        const updatedResults = res.data.results.map(row => {
-          console.log(row)
-          return {
-            ...row,
-            date: row.date,
-            file_type: row.request_data.media_urls,
-          };
-        });
-        setDataFromApi({ ...res.data, results: updatedResults });
-        console.log(dataFromApi);
-      })
-    
-      .catch(error => {
-        console.error(error);
-      });
-  }, [currentPage, dataFromApi]);*/
+  const pageData = dataFromApi ? dataFromApi?.results : [];
 
   useEffect(() => {
     const url = `https://harf.roshan-ai.ir/api/requests?page=${currentPage}`;

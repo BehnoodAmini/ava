@@ -1,6 +1,8 @@
 import "./VoiceBar.css";
 import { useState, useEffect } from "react";
 
+import { formatDurationForVoiceBar } from "../../helpers/TimeFunctions";
+
 import Slider from "@mui/material/Slider";
 import IconButton from "@mui/material/IconButton";
 import PauseRounded from "@mui/icons-material/PauseRounded";
@@ -59,12 +61,6 @@ const VoiceBar = (props) => {
         }
     };
 
-
-    function formatDuration(value) {
-        const minute = Math.floor(value / 60);
-        const secondLeft = value - minute * 60;
-        return `${minute < 10 ? `0${minute}` : minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
-    }
     return (
         <div className="voice-bar">
             <audio
@@ -101,8 +97,8 @@ const VoiceBar = (props) => {
             </div>
             <div className="duration">
                 {!position ?
-                      formatDuration(Math.ceil(props.duration ? props.duration : 0))
-                    : formatDuration(position)
+                      formatDurationForVoiceBar(Math.ceil(props.duration ? props.duration : 0))
+                    : formatDurationForVoiceBar(position)
                 }
             </div>
             <Slider

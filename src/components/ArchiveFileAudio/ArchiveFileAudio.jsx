@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
+import SimpleBarReact from "simplebar-react";
+import "../../../node_modules/simplebar-react/dist/simplebar.min.css";
 
 import "./ArchiveFileAudio.css"
 
 import VoiceBar from "../voiceBar/VoiceBar";
-
-import SimpleBarReact from "simplebar-react";
-import "../../../node_modules/simplebar-react/dist/simplebar.min.css";
+import { formatDuration, convertTimeToSeconds } from "../../helpers/TimeFunctions";
 
 import simpleTextIconGray from "../../assets/images/simple-text-icon-gray.svg"
 import simpleTextIconBlack from "../../assets/images/simple-text-icon-black.svg";
@@ -27,36 +27,6 @@ const ArchiveFileAudio = (props) => {
     const handleClickTimed = event => {
         setSimpleIsShown(false);
         setTimeIsShown(true);
-    }
-
-    const formatDuration = (value) => {
-        const timeIndex = value.split(":");
-        const hours = parseInt(timeIndex[0]);
-        const minutes = parseInt(timeIndex[1]);
-        const seconds = parseInt(timeIndex[2]);
-
-        if (hours === 0) {
-            let time = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-            return time;
-        } else {
-            let time = `${hours}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-            return time;
-        }
-    };
-
-    function convertTimeToSeconds(timeString) {
-        // Split the time string into an array of hours, minutes, and seconds.
-        const timeArray = timeString.split(":");
-        // Convert the hours, minutes, and seconds to numbers.
-        const hours = parseInt(timeArray[0]);
-        const minutes = parseInt(timeArray[1]);
-        const seconds = parseInt(timeArray[2]);
-        const hoursInSeconds = hours * 3600;
-        const minutesInSeconds = minutes * 60;
-        const secondsInSeconds = seconds * 1;
-        const totalSeconds = hoursInSeconds + minutesInSeconds + secondsInSeconds;
-
-        return totalSeconds;
     }
 
     useEffect(() => {
@@ -157,7 +127,6 @@ const ArchiveFileAudio = (props) => {
                 </button>
             </div>
             <img className="hr" src={hr} alt="hr" />
-
 
             <SimpleBarReact
                 style={{
