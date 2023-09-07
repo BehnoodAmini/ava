@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-import AudioUploaded from "../../AudioUploaded/AudioUploaded";
+import AudioUploaded from "../../audioUploaded/AudioUploaded";
 import { convertTimeToSeconds } from "../../../helpers/TimeFunctions";
 import './InputFileAndUpload.css';
 

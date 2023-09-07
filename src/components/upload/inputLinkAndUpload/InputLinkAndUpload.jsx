@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import validator from "validator";
 
-import AudioUploaded from "../../AudioUploaded/AudioUploaded";
+import AudioUploaded from "../../audioUploaded/AudioUploaded";
 import { convertTimeToSeconds } from "../../../helpers/TimeFunctions";
 import './InputLinkAndUpload.css';
 
