@@ -4,7 +4,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
-import ArchiveFileAudio from "../../ArchiveFileAudio/ArchiveFileAudio";
+import ArchiveFileAudio from "../../archiveFileAudio/ArchiveFileAudio";
 import {
     formatDurationNoZero,
     convertTimeToSeconds,

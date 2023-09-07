@@ -5,8 +5,8 @@ import { CircularProgress } from '@mui/material';
 
 import './App.css';
 
-const MainPage = lazy(() => import('./components/MainPage/MainPage'));
-const SecondaryPage = lazy(() => import('./components/SecondaryPage/SecondaryPage'));
+const MainPage = lazy(() => import('./components/mainPage/MainPage'));
+const SecondaryPage = lazy(() => import('./components/secondaryPage/SecondaryPage'));
 
 function App() {
   return (
