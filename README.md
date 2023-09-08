@@ -1,70 +1,33 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+توضیحات درباره پروژه:
+بعد از ضبط صدا کمی صبر کنید تا به صفحه بعد بروید و متن پیاده سازی شده نمایش داده شود.
+در صفحه آرشیو اگر متن ها نمایش داده نشد یکبار همان فایل را باز و بسته کنید.
+رکورد و فایل هایی که با اپلیکیشن خودم POST شوند به درستی از هم تشخیص داده میشوند و با ایکون مختص به خود نمایش داده میشوند و فایل ها و رکورد هایی که با اپلیکیشن های دیگر POST میشوند به صورت not my app مشخص می شوند.
+برای گرفتن حجم فایل ها که روی دکمه دانلود نشان داده شود هیچ روشی کار نکرد. این روش هم که در زیر میگذارم بهترین روش بود که فکر میکنم بخاطر تنظیمات سرور درست کار نمیکرد و بخاطر ارور های زیاد داخل کدها گذاشته نشد.
+async function calculateAudioSize(audioUrl) {
+        const defaultOptions = {
+            headers: {
+              'Authorization': `Token ${token}`,
+            },
+          };
+          
+        try {
+          const response = await fetch(audioUrl, { ...defaultOptions,
+            method: 'HEAD'
+          });
+      
+          if (response.ok) {
+            const contentLength = response.headers.get('Content-Length');
+            const sizeInBytes = parseInt(contentLength);
+            const sizeInKB = sizeInBytes / 1024;
+            const sizeInMB = sizeInKB / 1024;
+            
+            //setSizeInMegabytes(sizeInMB);
+            console.log(`Size of audio file: ${sizeInMB.toFixed(2)} MB`);
+          } else {
+            console.log('Failed to retrieve audio file headers');
+          }
+        } catch (error) {
+          console.log('Error calculating audio size:', error);
+        }
+      }
+      با تشکر از توجه شما.
